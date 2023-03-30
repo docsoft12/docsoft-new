@@ -1,0 +1,264 @@
+﻿@using Docsoftnew.Views.Components;
+@model DocsoftBack.Registration.RegisterModels;
+@{
+
+
+
+
+	/*<app>
+	<component type="typeof(Docsoftnew.Views.Components.Registor)" render-mode="ServerPrerendered" />
+		</app>*/
+
+}
+
+
+    <script language="JavaScript">
+        Webcam.set({
+            width: 200,
+            height: 200,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach('#my_camera');
+    </script>
+    <!-- Code to handle taking the snapshot and displaying it locally -->
+    <script language="JavaScript">
+        function take_snapshot() {
+            // take snapshot and get image data
+            Webcam.snap(function (data_uri) {
+                // display results in page
+                document.getElementById('result').innerHTML =
+                    '<img class="rounded-circle"  alt="Select image" src="' + data_uri + '"/>';
+
+                Webcam.upload(data_uri,
+                    '/images',
+                    function (code, text) {
+                        alert('Photo Captured');
+                    });
+
+            });
+        }
+    </script>
+
+
+<div style="border:groove;background-color:white">
+	<div class="container-fluid mt-4">
+
+
+
+		<form asp-action="Registration" method="post">
+
+
+
+
+			<div class="row mt-2">
+
+				
+					<div class="col-md-4" id="my_camera">
+
+					</div>
+
+
+				
+
+
+				<div class="text-center" id="result">
+					
+				</div>
+
+
+			
+
+			</div>
+
+			<div class="row mt-1">
+
+				<div class="text-center">
+					<input type="button" class="btn btn-success" value="Take Snapshot" onclick="take_snapshot()" />
+
+				</div>
+
+</div>
+
+
+			<hr />
+			<div class="row">
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Name:</label>
+
+				</div>
+
+
+				<div class="col-md-11 col-sm-11 ">
+					<input asp-for="Patient_Name" type="text" class="form-control" />
+
+				</div>
+
+
+			</div>
+
+			<div class="row mt-2">
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Mobile No.:</label>
+
+				</div>
+
+
+				<div class="col-md-5 col-sm-5 ">
+					<input asp-for="Mobile_No" type="text" class="form-control" />
+
+				</div>
+
+
+
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Aadhar No.:</label>
+
+				</div>
+
+
+				<div class="col-md-5 col-sm-5 ">
+					<input asp-for="Aadhar_No" type="text" class="form-control" />
+
+				</div>
+
+			</div>
+
+
+			<div class="row mt-1">
+
+
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Weight:</label>
+
+				</div>
+
+
+				<div class="col-md-2 col-sm-5 ">
+					<input asp-for="Weight" type="text" class="form-control" />
+
+				</div>
+
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Age:</label>
+
+				</div>
+
+
+				<div class="col-md-2 col-sm-5 ">
+					<input type="text" class="form-control" />
+
+				</div>
+
+
+
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Birth Date:</label>
+
+				</div>
+
+
+				<div class="col-md-2 col-sm-2 ">
+					<input asp-for="Birthdate" type="date" class="form-control" />
+
+				</div>
+
+
+
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Height:</label>
+
+				</div>
+
+
+				<div class="col-md-2 col-sm-2 ">
+					<input asp-for="Height" type="text" class="form-control" />
+
+				</div>
+
+			</div>
+
+			<div class="row mt-1">
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Address:</label>
+
+				</div>
+
+
+				<div class="col-md-11 col-sm-11 ">
+					<input asp-for="Address" type="text" class="form-control" />
+
+				</div>
+			</div>
+
+
+			<div class="row mt-2">
+
+
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">City:</label>
+
+				</div>
+
+
+				<div class="col-md-5 col-sm-5 ">
+					<input asp-for="City" type="text" class="form-control" />
+
+				</div>
+
+
+
+
+
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">PinCode:</label>
+
+				</div>
+
+
+				<div class="col-md-5 col-sm-5 ">
+					<input asp-for="Pincode" type="text" class="form-control" />
+
+				</div>
+
+
+			</div>
+
+
+			<hr />
+			<div class="row mt-4">
+				<div class="text-center">
+					<button type="submit" id="btnCapture" class="btn btn-primary btn-sm">Go To Apointment</button>
+					</div>
+				</div>
+		
+
+
+
+
+
+
+		</form>
+	</div>
+</div>
+
+<script>
+	$(function () {
+		$('#btnCapture').on('click', function () {
+			var file = document.getElementById("base64image").src;
+			$.ajax({
+				type: "POST",
+				url: '@Url.Action("Registration")',
+				data: { base64image: file },
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				success: function (result) {
+					$('#myModal3').modal('hide'); //hide the modal
+				},
+				error: function () {
+					alert("Error while inserting data");
+				}
+			});
+		});
+	});
+</script>

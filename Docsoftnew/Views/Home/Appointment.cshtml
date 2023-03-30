@@ -1,0 +1,259 @@
+﻿@using Docsoftnew.Views.Components;
+@using Microsoft.JSInterop;
+@using Microsoft.AspNetCore.Razor
+@using DocsoftBack.Appopintment
+@using DocsoftBack;
+@inject Docsoftnew.Models.IHomeTrain train
+
+@model ApponmentModels  
+@{
+
+
+
+
+	AppointMentDataAccess mentDataAccess = new();
+
+	List<ApponmentModels> Getapponments(string find )
+	{
+		List<ApponmentModels> apponments = new();
+ 
+			var sql = "";
+		 
+			if (find!=" ")
+			{
+
+
+			sql = "Select UHID,Patient_Name,Mobile_No,Aadhar_No from Petient_Details where UHID LIKE   '%" + find + "%' OR  Patient_Name  LIKE   '%" + find + "%' OR Mobile_No  LIKE   '%" + find + "%' OR Aadhar_No  LIKE   '%" + find + "%'  ";
+			}
+			else if(find == " ")
+			{
+				 sql = "Select UHID,Patient_Name,Mobile_No,Aadhar_No from Petient_Details where UHID    = '20230313-3' ";
+
+			}
+			apponments = MainEngine.GetList<ApponmentModels>(sql);
+		 
+
+			return apponments;
+			
+		
+		 
+		 
+
+
+	}
+
+	 
+}
+
+		<h1>Appointment</h1>
+
+		
+
+<div class="container-fluid" >
+
+	<form method="post" >
+	<div class="row mt-1">
+		 
+		<div class="col-md-1 col-sm-1">
+			<label class="form-label">Search:</label>
+
+		</div>
+		<div class="col-md-5 col-sm-5">
+			<input asp-for="Search"  class="form-control" type="text" />
+
+		</div>
+		<div class="col-md-4 col-sm-4">
+			<button asp-controller="Home" asp-action="Search" type="submit">Search</button>
+</div>
+	</div>
+ 
+ 
+</form>
+
+
+
+	<div class="row mt-2">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>UHID</th>
+					<th>Patient Name</th>
+					<th>Mobile No</th>
+					<th>Aadhar No</th>
+				</tr>
+			</thead>
+			<tbody>
+
+ 
+				@if (Model.Search!=null)
+					{
+				@foreach (var item in Getapponments(Model.Search))
+						{<tr>
+							<td>
+								@item.UHID
+							</td>
+							<td>
+								@item.Patient_Name
+							</td>
+							<td>
+								@item.Mobile_No
+							</td>
+							<td>
+								@item.Aadhar_No
+							</td>
+
+						</tr>
+
+						}
+					}
+					
+				 
+			
+			</tbody>
+
+
+		</table>
+	</div>
+
+
+
+
+<form>
+	
+			
+		
+		<div  class="row mt-2">
+	
+			<div class="col-md-2 col-sm-2" >
+	<label class="form-label">Date:</label>
+	</div>
+
+	<div class="col-md-5 col-sm-5" >
+		
+	<input class="form-control" type="date"	 />
+	</div>
+	</div>
+		<div class="row mt-2">
+			<div class="col-md-2 col-sm-2">
+
+
+				<label class="form-label">Faculty:</label>
+				</div>
+			<div class="col-md-5 col-sm-5">
+	<select class="form-select">
+					@foreach (var item in mentDataAccess.GetCommon("Facalty"))
+					{
+		<option>@item</option>
+		}
+	</select>
+		</div>
+		</div>
+
+
+		<div class="row mt-2">
+			<div class="col-md-2 col-sm-2">
+	<label class="form-label">Consultant Name:</label>
+	</div>
+	<div class="col-md-5 col-sm-5">
+	<select class="form-select">
+					@foreach (var item in mentDataAccess.GetEmployees())
+					{
+						<option>@item.Emp_Name</option>
+					}
+	</select>
+		</div>
+		</div>
+
+		<div class="row mt-2">
+						<div class="col-md-2 col-sm-2">
+	<label class="form-label">Available Time:</label>
+	</div>
+			<div class="col-md-5 col-sm-5">
+	<select  class="form-select">
+		<option></option>
+	</select>
+
+		</div>
+		</div>
+
+
+		<div class="row mt-2">
+			<div class="col-md-2 col-sm-2">
+	<label class="form-label">Source Time:</label>
+	</div>
+			<div class="col-md-5 col-sm-5">
+
+	<select class="form-select">
+					@foreach (var item in mentDataAccess.GetCommon("Source"))
+					{
+						<option>@item</option>
+					}
+				</select>
+	
+		</div>
+		</div>
+
+		<div class="row mt-2">
+			<div class="col-md-2 col-sm-2">
+
+	<label class="form-label">Payment Mode:</label>
+	</div>
+			<div class="col-md-5 col-sm-5">
+
+	<select class="form-select">
+					@foreach (var item in mentDataAccess.GetCommon("Payment_Mode"))
+					{
+						<option>@item</option>
+					}
+	</select>
+		</div>
+
+
+		<div class="row mt-2">
+			<div class="col-md-2 col-sm-2">
+				<label class="form-label" >Fees</label>
+			</div>
+
+				<div class="col-md-2 col-sm-2">
+					<input type="text" class="form-control" />
+				</div>
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label" >Paid</label>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<input class="form-control" type="text" />
+
+				</div>
+		</div>
+		<div class="row mt-2">
+
+			<div class="col-md-2 col-sm-2">
+              <label class="form-label" >Payment Ref No</label>
+</div>
+
+
+<div class="col-md-5 col-sm-5">
+	<input type="text" class="form-control"  />
+</div>
+		</div>
+		}
+	
+		<div class="row mt-3">
+			<div class="col-md-4">
+				<button class="btn btn-warning btn-sm" >Book Apoitment</button>
+			</div>
+		</div>
+		</div>
+
+
+
+		 
+
+
+
+
+</form>
+
+</div>
+
+ 
