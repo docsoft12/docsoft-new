@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "z2vSNi9cQWDe5uB7Etx1qZkDsJXsRlbo78RmL/ezBCQ=",
+  "Hash": "jKzKvyOHSsKcg7ykSLTroT9dTK5GY5yXIPdL5AfIkvg=",
   "Source": "Docsoftnew",
   "BasePath": "_content/Docsoftnew",
   "Mode": "Default",
@@ -1120,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\js\\loadash.js",
+      "SourceId": "Docsoftnew",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\",
+      "BasePath": "_content/Docsoftnew",
+      "RelativePath": "js/loadash.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\loadash.js"
     },
     {
       "Identity": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\js\\site.js",

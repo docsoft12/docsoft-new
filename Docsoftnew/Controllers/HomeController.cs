@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Newtonsoft.Json.Serialization;
+using DocsoftBack.Doctor;
 
 namespace Docsoftnew.Controllers
 {
@@ -22,6 +23,8 @@ namespace Docsoftnew.Controllers
 		private readonly IHomeTrain _train;
 		 
 		public static string temp;
+		public static DateTime days;
+
 		public HomeController(ILogger<HomeController> logger, IWebHostEnvironment envirment,IHomeTrain train)
 		{
 			_logger = logger;
@@ -51,33 +54,6 @@ namespace Docsoftnew.Controllers
  }
 
 
-[HttpPost]
-public IActionResult Appointment(ApponmentModels modes, string k)
-{
-
- modes.Search = temp;
-ApponmentModels models = new ApponmentModels()
-{
-
-Consultant_ID = modes.Consultant_ID,
-Ap_Time = modes.Ap_Time,
-Time_Slot = modes.Time_Slot,
-Attended_Time = modes.Attended_Time,
-faculty = modes.faculty,
-Fees = modes.Fees,
-Fees_Received = modes.Fees_Received,
-Date_ = modes.Date_,
-Date_Reg = modes.Date_Reg,
-Recept_No = modes.Recept_No,
-Age = modes.Age,
-Booked_By = modes.Booked_By,
-Appointment_ID = modes.Appointment_ID
-};
-
-
-
-return View();
-		}
  
 		[HttpPost]
 		public IActionResult Search(ApponmentModels models)
@@ -90,7 +66,52 @@ return View();
 		
 		}
 
- 
+		[HttpPost]
+		 public async Task<IActionResult> BookApoint(ApponmentModels modes)
+		{
+
+
+
+			Console.WriteLine(modes.Ap_Time);
+			ApponmentModels models = new ApponmentModels()
+			{
+
+
+
+
+
+				Consultant_ID = modes.Consultant_ID,
+			 
+				
+				Ap_Time = modes.Ap_Time,
+				Time_Slot = modes.Time_Slot,
+				Attended_Time = modes.Attended_Time,
+				faculty = modes.faculty,
+				Fees = modes.Fees,
+				Fees_Received = modes.Fees_Received,
+			 Recept_No = acp.Recipt_No("OPD", modes.Search),
+				Booked_By = modes.Booked_By,
+				Appointment_ID = acp.APID().ToString(),
+				UHID = modes.UHID,
+				Date_ = DateTime.UtcNow,
+				Date_Reg = DateTime.UtcNow,
+			 
+
+
+
+
+			};
+
+
+			await acp.BookAppointment(models);
+			Console.WriteLine("Success");
+
+
+			return RedirectToAction("Appointment");
+		}
+
+
+
 		public IActionResult Index()
 		{
 			temp = " ";
@@ -170,9 +191,10 @@ return View();
 					City = models.City,
 					Pincode = models.Pincode,
 					Height = models.Height,
-					Reg_Date = DateTime.Parse(DateTime.Today.ToString("yyyy-MM-dd"))
+					Reg_Date = DateTime.Parse(DateTime.Today.ToString("yyyy-MM-dd")),
+				  
 
-
+					
 				};
 
 				await reg.AddRegistration(register);
@@ -223,10 +245,83 @@ return View();
 
 		}
 
+
+
+		 
+		 
+		public JsonResult gettime(string id, string id2)
+		{
+			List<DoctorTimingModels> md = new();
+		  md =   acp.GetTiming(id, id2);
+
+
+			return Json(md);
+
+
+ 
+		}
+
+	 public JsonResult  GETLISTTIME(string id)
+	 {
+			List<string> getaptime = new();
+			string[] array_ = id.Split('-');
+
+
+
+
+
+
+			string StartTime1 = array_[0];
+			string EndTime1 = array_[1];
+
+			DateTime slotE = DateTime.Parse(EndTime1);
+
+			DateTime slotS = DateTime.Parse(StartTime1);
+			getaptime.Clear();
+
+			for (DateTime slotT = slotS; slotE > slotT; slotT.AddMinutes(10))
+			{
+				StartTime1 = slotT.ToString("HH:mm");
+
+				slotT = slotT.AddMinutes(10);
+				getaptime.Add(StartTime1.ToString());
+
+			}
+
+
+
+			return Json(getaptime);
+		}
+
+
+
+
+		public JsonResult GETUID(string id)
+		{
+			Console.WriteLine(id);
+			var sql = "";
+			string apponments = "";
+			sql = "select UHID,Patient_Name,Mobile_No,Aadhar_No from Petient_Details where UHID = '" + id + "' OR Patient_Name = '" + id + "' OR Mobile_No = '" + id + "' OR  Aadhar_No = '" + id + "'  ";
+			apponments = MainEngine.GetFirst<string>(sql);
+
+			
+
+			return Json(apponments);
+		}
+
+
+
+
+
+
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
+
+
+
 	}
 }

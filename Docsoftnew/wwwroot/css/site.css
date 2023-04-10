@@ -34,3 +34,9 @@ body {
         max-height: 80%;
     }
 }
+
+
+
+#time_list li.selected {
+    background-color: rgb(2, 95, 191);
+}

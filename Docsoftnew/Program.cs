@@ -17,6 +17,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddRazorPages();
+builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
+{
+	jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
 builder.Services.AddScoped<IHomeTrain, HomeTrain>();
 var app = builder.Build();
 

@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\js\\loadash.js",
+      "PackagePath": "staticwebassets\\js\\loadash.js"
+    },
+    {
       "Id": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

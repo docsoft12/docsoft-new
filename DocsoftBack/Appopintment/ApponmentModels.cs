@@ -17,7 +17,7 @@ namespace DocsoftBack.Appopintment
         public string Time_Slot { get; set; }
 
 
-        public DateTime Attended_Time { get; set; }
+		public DateTime Attended_Time { get; set; } = DateTime.UtcNow;
 		public string faculty { get; set; }
 		public decimal Fees { get; set; }
 		public decimal Fees_Received { get; set; }
@@ -29,6 +29,11 @@ namespace DocsoftBack.Appopintment
 		public string Booked_By { get; set; }
 		public string Appointment_ID { get; set; }
 		public int id { get; set; }
+        public string Source { get; set; }
+		public string Payment_Mode { get; set; }
+ 
+
+
 
 
 

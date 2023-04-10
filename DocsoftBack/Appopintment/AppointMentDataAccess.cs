@@ -38,12 +38,19 @@ namespace DocsoftBack.Appopintment
 
 		public List<DoctorTimingModels> GetTiming(string ID, string days)
 		{
-			var sql = "Select Start_Time, End_TIme,Fees_F from Doctors_Timing  Where Employee_ID = '" + ID + "' and Days ='" + days+ "'";
+			var sql = "Select Start_Time,End_TIme from Doctors_Timing  Where Employee_ID = '" + ID + "' and Days ='" + days+ "'";
 			return MainEngine.GetList<DoctorTimingModels>(sql);
 
 		}
 
-		public async Task <String> Recipt_No(string Catogory, string UHID)
+
+		public List<DoctorTimingModels> GetEndTime(string ID, string days)
+		{
+			var sql = "Select End_TIme from Doctors_Timing  Where Employee_ID = '" + ID + "' and Days ='" + days + "'";
+			return MainEngine.GetList<DoctorTimingModels>(sql);
+		}
+
+		public   string  Recipt_No(string Catogory, string UHID)
 		{
 			
 			String Recept_No = "00";
@@ -58,7 +65,7 @@ namespace DocsoftBack.Appopintment
 
 			};
 
-			await MainEngine.ExecuteQuery(insql, models);
+			  MainEngine.ExecuteQuery(insql, models);
 
 
 			 var select = "Select ID from  Recept_No  where Refrence_No='" + UHID + "' order by ID DESC";
@@ -123,8 +130,9 @@ namespace DocsoftBack.Appopintment
 
 		public async Task BookAppointment(ApponmentModels models)
 		{
-			var sql = "insert into Appoint_OPD(Consultant_ID,UHID, Ap_Time, Fees_Received, Time_Slot, faculty, Date_, Date_Reg, Discount, Age, Booked_By, Fees, Recept_No, Appointment_ID)values(@Consultant_ID,@ UHID, @Ap_Time, @Fees_Received, @Time_Slot, @faculty, Date_,@ Date_Reg, @Discount, @Age,@Booked_By, @Fees, @Recept_No, @Appointment_ID)";
+			var sql = @"Insert into Appoint_OPD(Consultant_ID,UHID,Fees_Received,faculty,Date_, Date_Reg,Age,Booked_By,Fees,Recept_No,Appointment_ID,Attended_Time,Ap_Time) values(@Consultant_ID,@UHID,@Fees_Received,@faculty,@Date_,@Date_Reg,@Age,@Booked_By,@Fees,@Recept_No, @Appointment_ID,@Attended_Time,@Ap_Time)";
 
+		 
 
 			await MainEngine.ExecuteQuery(sql, models);
 
@@ -133,8 +141,19 @@ namespace DocsoftBack.Appopintment
 
 
 
+    public int GetEmpID(string empname)
+		{
+			var sql = "Select Employee_ID from Employee Where  Emp_Name = '"+empname+"' ";
+
+			return MainEngine.GetFirst<int>(sql);
+
+		}
 
 
 
 	}
 }
+
+
+
+
