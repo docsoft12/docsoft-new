@@ -1,21 +1,20 @@
-﻿ 
-@{
-
+﻿@{
+	string component_section = "";
 	ViewData["Title"] = "Check Up";
 
+
+
 }
-@model DocsoftBack.Doctor.IDoctorCheckupModels	
-
-
-
+@model DocsoftBack.Doctor.IDoctorCheckupModels
 <div class="container">
 
+	<input type="text" asp-for="DocAdd"    hidden="hidden" id="component_section" />
 	<div class="row">
 		<div class="col-md-3">
 			<div class="row mt-1" >
 				<div class="col">
-					<button class="btn btn-primary">
-						Chef Complaint <svg style="  width:auto;height:auto;  background: red;
+					<button id="cheaf_button" class="btn btn-primary" style="width:200px">
+						Chef Complaint <svg style="  width:auto;height:auto; margin-left:10px; background: red;
   border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
 							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
 						</svg>
@@ -27,8 +26,8 @@
 
 				<div class="row mt-1" >
 				<div class="col">
-			<button class="btn btn-primary">
-						Chef Complaint <svg style="  width:auto;height:auto;
+					<button id="viltasbutton" class="btn btn-primary" style="width:200px;">
+						Viltas <svg style="  width:auto;height:auto;justify-content: flex-end;
   background: red;
   border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
 					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -40,8 +39,33 @@
 				<div class="row mt-1" >
 				<div class="col">
 
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
+			<button id="prs_button" class="btn btn-primary" style="width:200px">
+				Prescriptions <svg style="  width:auto;height:auto;
+  background: red;
+  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+				</svg>
+			</button>
+			</div>
+			</div>
+			 
+ 				<div class="row mt-1" >
+				<div class="col">
+			<button id="note_button" class="btn btn-primary" style="width:200px">
+			Notes <svg style="  width:auto;height:auto;
+  background: red;
+  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+				</svg>
+			</button>
+			</div>
+			</div>
+
+				<div class="row mt-1" >
+				<div class="col">
+
+					<button id="exam_button" class="btn btn-primary" style="width:200px">
+				Examination <svg style="  width:auto;height:auto;
   background: red;
   border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
 					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -51,229 +75,735 @@
 			</div>
 			 
 
+				 
 
-				<div class="row mt-1" >
-				<div class="col">
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
+				 
 
-				<div class="row mt-1" >
-				<div class="col">
-
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				<div class="row mt-1" >
-				<div class="col">
-
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				<div class="row mt-1" >
-				<div class="col">
-
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				<div class="row mt-1" >
-				<div class="col">
-
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				<div class="row mt-1" >
-				<div class="col">
-
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				<div class="row mt-1" >
-				<div class="col">
-
-			<button class="btn btn-primary">
-				Chef Complaint <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
+				 
 
 
 			</div>
 	 
-		<div class="col-md-6">
-			<div class="row mt-2">
-			<div  class="col" >
-				<h3>Cheaf Complaint</h3>
-</div>
-			</div>
-			<div class="row" >
-				<div class="col-md-5">
-					
-					<input list="mycomplent" type="text" style="font-size:11px" class="form-control" placeholder="Adding new complaint">
-				   <datalist id="mycomplent" >
+		<div class="col-md-8">
+			
 
-				   </datalist>
+		
+			 
+			 <div id="cheaf_div"  > 
+
+
+				<div class="row mt-2">
+					<div  class="col" >
+						<h3>Cheaf Complaint</h3>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-md-5">
+
+						<input id="txtSearch" type="text" style="font-size:11px" class="form-control" placeholder="Adding new complaint">
+
+
+						<input type="text"    hidden="hidden" id="txtadd" />
+					</div>
+
+
+
+					<div class="col-1" >
+						<label style="margin-top:5px;font-size:11px" class="form-label" >From</label>
+
+
+					</div>
+					<div class="col-md-2">
+						<input id="from_t" style="font-size:11px" type="text" class="form-control" />
+					</div>
+
+					<div class="col-md-3">
+						<select id="from_date" style="font-size:11px"  class="form-select" >
+							<option value="Days" >Days</option>
+							<option value="Weeks" >Weeks</option>
+							<option value="Months" >Months</option>
+							<option value="Years" >Years</option>
+
+						</select>
+					</div>
+
+					<div class="col-md-1">
+						<button id="addDoc" style="font-size:11px" class="btn btn-warning">Add</button>
+					</div>
+				</div>
+
+				<div class="row mt-1">
+					<div class="col-md-12">
+						<div style="border:groove;height:200px;overflow-y:auto; overflow-x:hidden;" >
+
+							<div class="row" >
+								<div class="col-md-4">
+									<ul class="event_list" id="list1">
+
+									</ul>
+								</div>
+
+								<div class="col-md-4">
+
+									<ul class="event_list1"  id="list2" >
+
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<ul class="event_list2" id="list3">
+
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col">
+						<textarea asp-for="Chief_Complaint"  id="compaint_area" rows="3" class="form-control" ></textarea>
+					</div>
+				</div>
+			<div class="row mt-2">
+						<div class="col">
+						<button  id="cfcbutton" type="button" class="btn btn-primary btn-lg btn-block">Next(Notes)</button>
+						</div>
+						</div>
+
+			</div>
+			 <div id="viltas_div" hidden="hidden" > 
+				
+				<div class="row mt-1">
+					<div style="background-color:blueviolet;color:white"> Vitsal </div>
+	
+					<div style="border:groove">
+
+					<div style="margin-top:10px" class="row" >
+					<div  style="color:black"  class="col-md-2">
+						<label class="form-label" >BP:</label>
+						</div>
+						<div class="col-md-4" >
+							<input asp-for="BP" type="text" class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+							    <label class="form-label" >mmHg</label>	 
+								</div>
+					</div>
+
+
+
+						<div style="margin-top:10px" class="row">
+							<div style="color:black" class="col-md-2">
+								<label class="form-label">Puls:</label>
+							</div>
+							<div class="col-md-4">
+								<input asp-for="Pulse" type="text" class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+								<label class="form-label">bpm</label>
+							</div>
+						</div>
+
+						<div style="margin-top:10px" class="row">
+							<div style="color:black" class="col-md-2">
+								<label class="form-label">Spo2:</label>
+							</div>
+							<div class="col-md-4">
+								<input asp-for="Spo2" type="text" class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+								<label class="form-label">%</label>
+							</div>
+						</div>
+
+
+						<div style="margin-top:10px" class="row">
+							<div style="color:black" class="col-md-2">
+								<label class="form-label">PA:</label>
+							</div>
+							<div class="col-md-4">
+								<select asp-for="PA"  class="form-select" >
+									<option></option>
+								</select>
+							</div>
+
+							 
+						</div>
+
+
+
+
+						<div style="margin-top:10px" class="row">
+							<div style="color:black" class="col-md-2">
+								<label class="form-label">Fever:</label>
+							</div>
+							<div class="col-md-4">
+								<input asp-for="Fever" type="text" class="form-control" />
+							
+							</div>
+
+							<div class="col-md-1">
+								<label class="form-label">'F</label>
+							</div>
+						</div>
+
+
+
+					</div>
+
+
+
+				</div>
+				<div class="row mt-2">
+					<div class="col">
+						<button id="just_test" type="button" class="btn btn-primary btn-lg btn-block">Next(Notes)</button>
+					</div>
 				</div>
 				
-
-
-<div class="col-1" >
-	<label style="margin-top:5px;font-size:11px" class="form-label" >From</label>
-
-
-</div>
-				<div class="col-md-2">
-					<input style="font-size:11px" type="text" class="form-control" />
-				</div>
-
-				<div class="col-md-3">
-				 <select style="font-size:11px"  class="form-select" >
-					 <option value="Days" >Days</option>
-					 <option value="Weeks" >Weeks</option>
-					 <option value="Months" >Months</option>
-					 <option value="Years" >Years</option>
-
-				 </select>
-				</div>
-
-				<div class="col-md-1">
-					<button style="font-size:11px" class="btn btn-warning">Add</button>
-				</div>
 			</div>
-	 
-			<div class="row mt-1">
-           <div class="col-md-12">
-			   <div style="border:groove;height:200px" >
-               
-				   <div class="row" >
-        <div class="col-md-4">
-	     <ul id="list1" >
 
-			</ul>
-		</div>
+			<div id="prs_div" hidden="hidden">
+				<div style="border:groove">
+               <div class="row mt-1">
+				   <div class="col-md-3" >
+			            <select   class="form-select" >
+							<option value="Tab" >Tab</option>
+							<option value="Cap" >Cap</option>
+							<option value="ML" >ML</option>
 
-		   <div class="col-md-4">
-			     <ul id="list2" >
+						</select>
+					   </div>
 
-			</ul>
-		</div>
-							<div class="col-md-4">
-								  <ul id="list3" >
+					   <div class="col-md-4" >
 
-			</ul>
+						   <input asp-for="Medicine" list="prescriptions" id="search_pr" placeholder="Prescriptions..." type="text" class="form-control" />
+						   <datalist id="prescriptionsdata" >
+							   
+						   </datalist>
+						   </div>
+
+						   <div class="col-md-2" >
+						   <div style="margin-top:5px" class="row" >
+							   <div class="col-md-4">
+
+	  
+<div    class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="mr_ch" value="Morning">
+  <label class="form-check-label" for="mr_ch" >M</label>
+</div>
+</div>
+<div class="col-md-4">
+<div   class="form-check form-check-inline">
+
+  <input class="form-check-input" type="radio"  id="Af_ch" value="AfterNoon">
+										<label class="form-check-label" for="Af_ch">A</label>
+</div>
+</div>
+
+<div class="col-md-4">
+								<div   class="form-check form-check-inline">
+
+  <input class="form-check-input" type="radio"   id="N_ch" value="N/A">
+										<label class="form-check-label" for="N_ch">N</label>
+</div>	
+								   </div>
+							   </div>
+
+				   </div>
+
+				   <div class="col-md-3">
+					   <div class="row" >
+				 	<div class="col-md-7">
+
+					   <input asp-for="Duration" type="text" class="form-control" placeholder="Days." />
+					   
+				   </div>
+				   <div class="col-md-1">
+					   <button  class="btn btn-outline-info btn-sm">Add</button>
+					   </div>
+				   </div>
+
+
+				   </div>
+
+
+				   </div>
+				   <div class="row mt-2" >
+					   <div class="col-md-7">
+						   <div class="row">
+
+					   <div class="col-md-4">
+	  
+<div   class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="bfood"   value="Before Food">
+  <label class="form-check-label" for="bfood" >Before Food</label>
+</div>
+						   </div>
+
+					   <div class="col-md-4">
+
+
+								<div  class="form-check form-check-inline">
+  <input class="form-check-input" type="radio"   id="Afood" value="After Food">
+  <label class="form-check-label" for="Afood">After Food</label>
+</div>
+						   </div>
+
+					<div class="col-md-4">
+
+
+								<div   class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="other" value="Other">
+  <label class="form-check-label" for="othger">Other</label>
+</div>
+					</div>
+
+
+					   </div>
+					</div>
+				
+					<div class="col-md-2">
+							<input asp-for="QtyPer" placeholder="Qty Dose" type="text" class="form-control">
+</div>
+
+
+
+					<div class="col-md-3" >
+  
+						 <select class="form-select" >
+							 <option value="English" >English</option>
+							 <option value="Hindi" >Hindi</option>
+							 <option value="Marathi" >Marathi</option>
+							  
+						 </select>
+
+						</div>
+
+
+
+				</div>
+					</div>
+
+				
+					<div class="row mt-3">
+						<div  class="col">
+						<div style="border:groove">
+							<table style="height:320px" class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Sr.No</th>
+      <th scope="col">Medicine Name</th>
+      <th scope="col">Dosage</th>
+      <th scope="col">Durations</th>
+    </tr>
+  </thead>
+  <tbody>
+
+	  <tr>
+ 
+     
+</tr>
+
+
+	  </tbody>
+
+	  </table>
 							</div>
-</div>
+						</div>
+			
+						</div>
+					<div class="row mt-2">
+						<div class="col">
+						<button type="button" class="btn btn-primary btn-lg btn-block">Next(Notes)</button>
+						</div>
+						</div>
 
+					</div>
+
+
+
+			<div id="note_div" hidden="hidden">
+
+						<div class="row mt-2" >
+						<div class="col" >
+						<div class="input-group">
+							<input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+							<button type="button" class="btn btn-outline-primary">search</button>
+						</div>
+						</div>
+
+							</div>
+
+						<div class="row mt-2" >
+							
+							<div class="col">
+								<div style="border:groove">
+						<div class="list-group">
+						 <ul>
+
+							<li><button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button></li>
+							<li><button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button></li>
+							<li><button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button></li>
+							<li><button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button></li>
+								<li><button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button></li>
+
+						 
+						</ul>
+						</div>
+
+						</div>
+
+
+								</div>
+							</div>
+
+<div class="row mt-2" >
+
+
+	<div class="col">
+		<label class="form-label" >Notes</label>
 		</div>
-			</div>
-			</div>
-			<div class="row mt-2">
-				 <div class="text-center">
-					 <button style="width:max-content" class="btn btn-primary">Next</button>
-				 </div>
-			</div>
 
-		 </div>
+	</div>
 
-		<div class="col-md-3">
+
+
+				<div class="row mt-2">
+
+
+					<div class="col">
+						 <textarea class="form-control" rows="3" ></textarea>
+					</div>
+
+				</div>
+
+
+				<div class="row mt-2">
+					<div class="col">
+						<button type="button" class="btn btn-primary btn-lg btn-block">Next(Notes)</button>
+					</div>
+				</div>
+				</div>
+			<div id="exam_div" hidden="hidden">
+
+					 
+						
+						<div class="row mt-2" >
+						<div class="col" >
+						<div class="input-group">
+							<input type="search" class="form-control rounded"  aria-label="Search" aria-describedby="search-addon" />
+							<button type="button" class="btn btn-outline-primary">Add</button>
+						</div>
+						</div>
+
+							</div>
+
+					 
+
+<div class="row mt-2" >
+
+
+	<div class="col">
+		<label class="form-label" >Examinations Tests</label>
+		</div>
+
+	</div>
+
+
+
+				<div class="row mt-2">
+
+
+					<div class="col">
+						 <textarea asp-for="Examination" class="form-control" rows="3" ></textarea>
+					</div>
+
+				</div>
+
+
+				<div class="row mt-2">
+					<div class="col">
+						<button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+					</div>
+				</div>
+
+					</div>
+		</div>
+			
+			<div class="col-md-1">
 			.col-md-3</div>
 	</div>
 
 
 </div>
  
-
-
-
-
-
-
-
-
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="~/js/loadash.js"></script>
 
 <script>
- 
 
-	$(window).load(function() {
- 
+			$(function () { 
+	$("#viltasbutton").click(function () {
+
+		// $('#viltas_div').attr( 'hidden','1000');
+			$("#viltas_div").removeAttr("hidden");
+
+			$('#cheaf_div').attr('hidden', 'hidden');
+			$('#prs_div').attr('hidden', 'hidden');
+			$('#note_div').attr('hidden', 'hidden');
+			$('#exam_div').attr('hidden', 'hidden');
+
+
+
+		     
+	});
+			});
+
+
+	$(function () {
+		$("#cheaf_button").click(function () {
+
+			// $('#viltas_div').attr( 'hidden','1000');
+			$("#cheaf_div").removeAttr("hidden");
+
+			$('#viltas_div').attr('hidden', 'hidden');
+			$('#prs_div').attr('hidden', 'hidden');
+			$('#note_div').attr('hidden', 'hidden');
+			$('#exam_div').attr('hidden', 'hidden');
+
+
+
+
+		});
+	});
+
+
+
+
+
+
+	$(function () {
+		$("#prs_button").click(function () {
+
+			// $('#viltas_div').attr( 'hidden','1000');
+			$("#prs_div").removeAttr("hidden");
+
+			$('#viltas_div').attr('hidden', 'hidden');
+			$('#cheaf_div').attr('hidden', 'hidden');
+			$('#note_div').attr('hidden', 'hidden');
+			$('#exam_div').attr('hidden', 'hidden');
+
+
+
+
+		});
+	});
+
+
+	
+	$(function () {
+		$("#note_button").click(function () {
+
+			// $('#viltas_div').attr( 'hidden','1000');
+			$("#note_div").removeAttr("hidden");
+
+			$('#viltas_div').attr('hidden', 'hidden');
+			$('#cheaf_div').attr('hidden', 'hidden');
+			$('#prs_div').attr('hidden', 'hidden');
+			$('#exam_div').attr('hidden', 'hidden');
+
+
+
+
+		});
+	});
+
+
+
+	$(function () {
+		$("#exam_button").click(function () {
+
+			// $('#viltas_div').attr( 'hidden','1000');
+			$("#exam_div").removeAttr("hidden");
+
+			$('#viltas_div').attr('hidden', 'hidden');
+			$('#cheaf_div').attr('hidden', 'hidden');
+			$('#prs_div').attr('hidden', 'hidden');
+			$('#note_div').attr('hidden', 'hidden');
+
+
+
+
+		});
+	});
+
+
+
+		$(function () { 
+	$("#cfcbutton").click(function () {
+
+
+		var dv = $("#compaint_area").val();
+			 $.ajax(  
+        {  
+            type: 'POST',  
+            dataType: 'JSON',  
+            url: '/Doctor/SetCheafComplent',
+					data: { comp: dv },
+					success:  
+                function (response)  
+                {  
+					console.log("Success");
+                },  
+            error:  
+                function (response)  
+                {  
+                    alert("Error: " + response);  
+                }  
+        });  
+
+
+
+	});
+	});
+
+
+
+
+	$(document).ready(function () {
+		var d = document.getElementById("component_section").setAttribute('value', " ");
+  
+		
+
+
 		$.getJSON('Doctor/GetComplents/', function (data) {
 
-			let tempp = "list - group - item";
+		 
+	  
 
-			$.each(data, function (i, item) {
+ 
+			for (let i = 0; i<data.length; i++)
+			{
+			    $("#list1").append("<li>" + data[i] + "</li>");
+				 i  = i+1;
+				$("#list2").append("<li>" + data[i] + "</li>");
+				i = i + 1;
 
-				$("#chfd").append("<li class=" + tempp + ">" + item + "</li>");
-			})
+				$("#list3").append("<li>" + data[i] + "</li>");
+			}
+
+ 
 		});
 
 
 	});
 
+ 
 
 
+	$(function () { 
+	$("#addDoc").click(function () {
+		var mk = $("#txtSearch").val();
+	 	var d = document.getElementById("txtadd").setAttribute('value', mk);
 
+		var kk = $('#txtadd').val();
+		 
+		//txtadd
+			$.getJSON('Doctor/AddComplaint/'+ kk, function (data) {
+				alert($('#txtadd').val());
 
-	$("#addDoc").click(function (data) {
-		$('#dordata').val();
-		console.log();
-		$.getJSON('Doctor/AddComplaint/' +  $('#dordata').val(), function (data) {
+			console.log(kk);
+				$("#compaint_area").append(" " + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
 
-			console.log($('#dordata').val());
-			$.each(data, function (i, item) {
+				$("#list1").append("<li>" +$('#txtadd').val() + "</li>");
+		   
+				//complaint_area
+				//from_t
+				//from_date
 
-				$("#chfd").append("<li>" +$('#dordata').val() + "</li>");
-			})
-		});
+			});
 	});
 
+	});
+
+	$(function(){
+	$("ul.event_list").click(function()
+	{
+	    var items = document.querySelectorAll("ul li");
+		items.forEach(function(item){
+
+			item.addEventListener('click',function(e){
+			 
+					var d = document.getElementById("txtSearch").setAttribute('value', this.innerText);
+
+			});
+
+		});
+
+	});
+	});
+
+
+
+		$("#search_pr").keyup(function () {
+
+
+		$.ajax(
+			{
+				type: 'POST',
+				dataType: 'JSON',
+				url: '/Doctor/SetCheafComplent',
+				data: { comp: dv },
+				success:
+					function (response) {
+						console.log("Success");
+					},
+				error:
+					function (response) {
+						alert("Error: " + response);
+					}
+			});
+
+	});
+
+
+
+ 
+	$("#txtSearch").keyup(function () {
+
+		var searchText = $(this).val();
+
+		$('#list1 > li').each(function () {
+
+			var currentLiText = $(this).text(),
+				showCurrentLi = currentLiText.indexOf(searchText) !== -1;
+
+			$(this).toggle(showCurrentLi);
+
+		});
+		
+		$('#list2 > li').each(function () {
+
+			var currentLiText = $(this).text(),
+				showCurrentLi = currentLiText.indexOf(searchText) !== -1;
+
+			$(this).toggle(showCurrentLi);
+
+		});
+		
+		$('#list3 > li').each(function () {
+
+			var currentLiText = $(this).text(),
+				showCurrentLi = currentLiText.indexOf(searchText) !== -1;
+
+			$(this).toggle(showCurrentLi);
+
+		});
+	});
 
 </script>

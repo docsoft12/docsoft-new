@@ -10,7 +10,7 @@ namespace DocsoftBack.Doctor
 	{
 		public string Appointment_ID { get; set; }
 		public DateTime NextFollowUp { get; set; }
-		public string UHID { get; set; }
+		public string UHID { get; set; } 
 		public string Chief_Complaint { get; set; }
 		public DateTime Date_ { get; set; }
 		public string BP { get; set; }
@@ -22,14 +22,19 @@ namespace DocsoftBack.Doctor
 
 		public string CheckupID { get; set; }
 		public string Consultant { get; set; }
-        public string DocAdd { get; set; }
-		public string Dosage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Duration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Instruction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Medicine { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Quantity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Sr_No { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Ap_ID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Examination { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public string DocAdd { get; set; }
+		public string Dosage { get; set; }
+		public string Duration { get; set; }
+		public string Instruction { get; set; }
+		public string Medicine { get; set; }
+		public string Quantity { get; set; }
+		public string Sr_No { get; set; }
+		public string Ap_ID { get; set; }
+		public string Examination { get; set; }
+		public string QtyPer { get; set; }
+		public string TimeTab { get; set; }
+		public string EatTime { get; set; }
+
+
 	}
 }

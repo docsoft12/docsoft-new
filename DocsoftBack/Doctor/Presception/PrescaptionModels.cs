@@ -17,8 +17,8 @@ namespace DocsoftBack.Doctor.Presception
 		public string Instruction { get; set; }
 		public string Duration { get; set; }
 		public string Quantity { get; set; }
-		public string Ap_ID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public DateTime Date_ { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Examination { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public string Ap_ID { get; set; }
+		public DateTime Date_ { get; set; }
+		public string Examination { get; set; }
 	}
 }
