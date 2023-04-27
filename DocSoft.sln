@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docsoftnew", "Docsoftnew\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocsoftBack", "DocsoftBack\DocsoftBack.csproj", "{493DD47A-3848-4996-AD13-C8BBE1EE67B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDCLDOCSOFT", "RDCLDOCSOFT\RDCLDOCSOFT.csproj", "{293C8409-1C41-41F9-986D-78FB3D8AC30F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{493DD47A-3848-4996-AD13-C8BBE1EE67B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{493DD47A-3848-4996-AD13-C8BBE1EE67B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{493DD47A-3848-4996-AD13-C8BBE1EE67B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293C8409-1C41-41F9-986D-78FB3D8AC30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293C8409-1C41-41F9-986D-78FB3D8AC30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293C8409-1C41-41F9-986D-78FB3D8AC30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293C8409-1C41-41F9-986D-78FB3D8AC30F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

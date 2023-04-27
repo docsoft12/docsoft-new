@@ -11,6 +11,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Serialization;
 using DocsoftBack.Doctor;
+using AspNetCore.Reporting;
+using System.Data;
 
 namespace Docsoftnew.Controllers
 {
@@ -20,16 +22,17 @@ namespace Docsoftnew.Controllers
 
 		private readonly IWebHostEnvironment _envirment;
 
-		private readonly IHomeTrain _train;
+		 
 		 
 		public static string temp;
 		public static DateTime days;
 
-		public HomeController(ILogger<HomeController> logger, IWebHostEnvironment envirment,IHomeTrain train)
+		public HomeController( IWebHostEnvironment envirment)
 		{
-			_logger = logger;
+		 
 			_envirment = envirment;
-			_train = train;
+			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+			 
 		}
 		 
 		public Registration reg = new();
@@ -82,7 +85,7 @@ namespace Docsoftnew.Controllers
 
 				Consultant_ID = modes.Consultant_ID,
 			 
-				
+				Status = "Active",
 				Ap_Time = modes.Ap_Time,
 				Time_Slot = modes.Time_Slot,
 				Attended_Time = modes.Attended_Time,
@@ -107,7 +110,7 @@ namespace Docsoftnew.Controllers
 			Console.WriteLine("Success");
 
 
-			return RedirectToAction("Appointment");
+			return RedirectToRoute(new { action = "CheckUp", controller = "Doctor", area = "" });
 		}
 
 
@@ -206,7 +209,7 @@ namespace Docsoftnew.Controllers
 				Console.WriteLine(ex.Message);
 			}
 
-			return View();
+			return RedirectToRoute(new { action = "Appointment", controller = "Home", area = "" });
 		}
 
 
@@ -308,10 +311,44 @@ namespace Docsoftnew.Controllers
 
 			return Json(apponments);
 		}
+	 
+		public IActionResult GetPrint()
+		{
+			Console.WriteLine("Hi");
+			DataTable dt = new DataTable();
+			dt = GetDataTables();
+			string mimetype = "";
+			int extension = 1;
+			Dictionary<string, string> parameters = new Dictionary<string, string>();
+			parameters.Add("prm","RDLC Report");
+			var path = Path.Combine(_envirment.ContentRootPath,"Rports","Test.rdlc");
+			LocalReport lreport = new LocalReport(path);
+			lreport.AddDataSource("edataset",dt);
+			var result = lreport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+			return File(result.MainStream,"application/pdf");
+		}
 
+		public DataTable GetDataTables()
+		{
 
+			var dt = new DataTable();
+			dt.Columns.Add("ID");
+			dt.Columns.Add("Name");
+			dt.Columns.Add("Age");
 
+			DataRow row;
+			for (int i = 0; i <=10; i++)
+			{
+				row = dt.NewRow();
+				row["ID"] = i;
+				row["Name"] = "Amir Shaikh"+i;
+				row["Age"] = "10"+i;
+				dt.Rows.Add(row);
 
+			}
+
+			return dt;
+		}
 
 
 

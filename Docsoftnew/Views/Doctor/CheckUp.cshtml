@@ -1,14 +1,18 @@
 ﻿@{
-	string component_section = "";
+	@using DocsoftBack.Doctor.Presception;
+	@using DocsoftBack;
 	ViewData["Title"] = "Check Up";
 
-
-
-}
+	 }
 @model DocsoftBack.Doctor.IDoctorCheckupModels
 <div class="container">
-
+	
 	<input type="text" asp-for="DocAdd"    hidden="hidden" id="component_section" />
+
+	<input type="text" asp-for="TimeTab"    hidden="hidden" id="TimeTab" />
+
+	<input type="text" asp-for="EatTime"    hidden="hidden" id="EatTime" />
+
 	<div class="row">
 		<div class="col-md-3">
 			<div class="row mt-1" >
@@ -128,7 +132,7 @@
 					</div>
 
 					<div class="col-md-1">
-						<button id="addDoc" style="font-size:11px" class="btn btn-warning">Add</button>
+						<button  id="addDoc" style="font-size:11px" class="btn btn-warning">Add</button>
 					</div>
 				</div>
 
@@ -169,11 +173,9 @@
 						<button  id="cfcbutton" type="button" class="btn btn-primary btn-lg btn-block">Next(Notes)</button>
 						</div>
 						</div>
-
-			</div>
+  			</div>
 			 <div id="viltas_div" hidden="hidden" > 
-				
-				<div class="row mt-1">
+				 <div   class="row mt-1">
 					<div style="background-color:blueviolet;color:white"> Vitsal </div>
 	
 					<div style="border:groove">
@@ -267,6 +269,7 @@
 
 			<div id="prs_div" hidden="hidden">
 				<div style="border:groove">
+				 <form id="prescriptions_form">
                <div class="row mt-1">
 				   <div class="col-md-3" >
 			            <select   class="form-select" >
@@ -276,29 +279,24 @@
 
 						</select>
 					   </div>
-
-					   <div class="col-md-4" >
-
-						   <input asp-for="Medicine" list="prescriptions" id="search_pr" placeholder="Prescriptions..." type="text" class="form-control" />
-						   <datalist id="prescriptionsdata" >
-							   
-						   </datalist>
-						   </div>
-
-						   <div class="col-md-2" >
+					    
+					   <div class="col-md-4">
+						  <input asp-for="Medicine" list="prescriptionsdata" id="search_pr" placeholder="Prescriptions..." type="text" class="form-control" />
+						   <datalist style="height:200px" id="prescriptionsdata" >
+							  </datalist>
+	
+						  </div>
+						    <div class="col-md-2" >
 						   <div style="margin-top:5px" class="row" >
 							   <div class="col-md-4">
-
-	  
-<div    class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" id="mr_ch" value="Morning">
+ <div    class="form-check form-check-inline">
+  <input class="form-check-input" name="MMR"   type="radio" id="mr_ch" value="Morning">
   <label class="form-check-label" for="mr_ch" >M</label>
-</div>
+</div>4
 </div>
 <div class="col-md-4">
 <div   class="form-check form-check-inline">
-
-  <input class="form-check-input" type="radio"  id="Af_ch" value="AfterNoon">
+   <input class="form-check-input" name="MMR" type="radio"  id="Af_ch" value="AfterNoon">
 										<label class="form-check-label" for="Af_ch">A</label>
 </div>
 </div>
@@ -306,7 +304,7 @@
 <div class="col-md-4">
 								<div   class="form-check form-check-inline">
 
-  <input class="form-check-input" type="radio"   id="N_ch" value="N/A">
+  <input class="form-check-input" name="MMR" type="radio"   id="N_ch" value="N/A">
 										<label class="form-check-label" for="N_ch">N</label>
 </div>	
 								   </div>
@@ -318,11 +316,11 @@
 					   <div class="row" >
 				 	<div class="col-md-7">
 
-					   <input asp-for="Duration" type="text" class="form-control" placeholder="Days." />
+					   <input asp-for="Duration" type="text" id="drtion" class="form-control" placeholder="Days." />
 					   
 				   </div>
 				   <div class="col-md-1">
-					   <button  class="btn btn-outline-info btn-sm">Add</button>
+									<button id="add_medic"   type="button"  onclick="AddMed()" class="btn btn-outline-info btn-sm">Add</button>
 					   </div>
 				   </div>
 
@@ -338,7 +336,7 @@
 					   <div class="col-md-4">
 	  
 <div   class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" id="bfood"   value="Before Food">
+  <input class="form-check-input" name="foodTime" type="radio" id="bfood"   value="Before Food">
   <label class="form-check-label" for="bfood" >Before Food</label>
 </div>
 						   </div>
@@ -347,7 +345,7 @@
 
 
 								<div  class="form-check form-check-inline">
-  <input class="form-check-input" type="radio"   id="Afood" value="After Food">
+  <input class="form-check-input" name="foodTime" type="radio"   id="Afood" value="After Food">
   <label class="form-check-label" for="Afood">After Food</label>
 </div>
 						   </div>
@@ -356,7 +354,7 @@
 
 
 								<div   class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" id="other" value="Other">
+  <input class="form-check-input" name="foodTime" type="radio" id="other" value="Other">
   <label class="form-check-label" for="othger">Other</label>
 </div>
 					</div>
@@ -366,14 +364,14 @@
 					</div>
 				
 					<div class="col-md-2">
-							<input asp-for="QtyPer" placeholder="Qty Dose" type="text" class="form-control">
+							<input asp-for="QtyPer" id="qtprdays" placeholder="Qty Dose" type="text" class="form-control">
 </div>
 
 
 
 					<div class="col-md-3" >
   
-						 <select class="form-select" >
+						 <select  class="form-select" >
 							 <option value="English" >English</option>
 							 <option value="Hindi" >Hindi</option>
 							 <option value="Marathi" >Marathi</option>
@@ -385,13 +383,14 @@
 
 
 				</div>
+				</form>
 					</div>
 
 				
 					<div class="row mt-3">
 						<div  class="col">
 						<div style="border:groove">
-							<table style="height:320px" class="table table-hover">
+							<table id="Pre_table" style="height:320px" class="table table-hover">
   <thead>
     <tr>
       <th scope="col">Sr.No</th>
@@ -400,15 +399,10 @@
       <th scope="col">Durations</th>
     </tr>
   </thead>
-  <tbody>
-
-	  <tr>
- 
-     
-</tr>
-
-
-	  </tbody>
+  <tbody id="medic_table" >
+	   
+	 
+								</tbody>
 
 	  </table>
 							</div>
@@ -475,7 +469,7 @@
 
 
 					<div class="col">
-						 <textarea class="form-control" rows="3" ></textarea>
+						 <textarea asp-for="Note" id="NOTE_T" class="form-control" rows="3" ></textarea>
 					</div>
 
 				</div>
@@ -495,7 +489,7 @@
 						<div class="col" >
 						<div class="input-group">
 							<input type="search" class="form-control rounded"  aria-label="Search" aria-describedby="search-addon" />
-							<button type="button" class="btn btn-outline-primary">Add</button>
+							<button  type="button" class="btn btn-outline-primary">Add</button>
 						</div>
 						</div>
 
@@ -511,10 +505,7 @@
 		</div>
 
 	</div>
-
-
-
-				<div class="row mt-2">
+	 	<div class="row mt-2">
 
 
 					<div class="col">
@@ -529,25 +520,65 @@
 						<button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
 					</div>
 				</div>
-
 					</div>
 		</div>
-			
 			<div class="col-md-1">
 			.col-md-3</div>
 	</div>
 
 
 </div>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+ <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
  
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="~/js/loadash.js"></script>
+<script> 
 
-<script>
 
-			$(function () { 
+ 
+
+ $("#add_medic").click(function() {
+    var med = $("#search_pr").val();
+    var dosage = $("#qtprdays").val();
+    var duration = $("#drtion").val();
+    var newrow = '<tr><td>' + 1 + '</td><td>' + med + '</td>td>' + dosage + '</td>td>' + duration + '</td></tr>';
+    $('#Pre_table tr:last').after(newrow);});​​​​​
+
+	 function AddMed()
+	 {
+		 let data = {
+			   Medicine: $("#search_pr").val(),
+        Duration: $("#drtion").val(),
+        QtyPer: $("#qtprdays").val(),
+        EatTime: $("#EatTime").val(),
+        TimeTab: $("#TimeTab").val() 
+
+		 }
+        console.log(data);
+        alert(data);
+        $.ajax({
+            type: 'POST',
+			url: '/Doctor/AddMedic',
+			data: {Medicine: $("#search_pr").val(),
+			Duration: $("#drtion").val(),
+			QtyPer: $("#qtprdays").val(),
+			EatTime: $("#EatTime").val(),
+			TimeTab: $("#TimeTab").val()},
+            success: function (result) {
+                alert('Successfully received Data ');
+                console.log(result);
+            },
+            error: function () {
+                alert('Failed to receive the Data');
+                console.log('Failed ');
+            }
+        });
+	 }
+
+	  		$(function () { 
 	$("#viltasbutton").click(function () {
 
 		// $('#viltas_div').attr( 'hidden','1000');
@@ -581,11 +612,7 @@
 
 		});
 	});
-
-
-
-
-
+	 
 
 	$(function () {
 		$("#prs_button").click(function () {
@@ -649,59 +676,13 @@
 
 
 		var dv = $("#compaint_area").val();
-			 $.ajax(  
-        {  
-            type: 'POST',  
-            dataType: 'JSON',  
-            url: '/Doctor/SetCheafComplent',
-					data: { comp: dv },
-					success:  
-                function (response)  
-                {  
-					console.log("Success");
-                },  
-            error:  
-                function (response)  
-                {  
-                    alert("Error: " + response);  
-                }  
-        });  
-
-
-
+          
 	});
-	});
-
-
-
-
-	$(document).ready(function () {
-		var d = document.getElementById("component_section").setAttribute('value', " ");
-  
-		
-
-
-		$.getJSON('Doctor/GetComplents/', function (data) {
-
-		 
-	  
-
- 
-			for (let i = 0; i<data.length; i++)
-			{
-			    $("#list1").append("<li>" + data[i] + "</li>");
-				 i  = i+1;
-				$("#list2").append("<li>" + data[i] + "</li>");
-				i = i + 1;
-
-				$("#list3").append("<li>" + data[i] + "</li>");
-			}
-
- 
 		});
 
 
-	});
+
+
 
  
 
@@ -715,7 +696,7 @@
 		 
 		//txtadd
 			$.getJSON('Doctor/AddComplaint/'+ kk, function (data) {
-				alert($('#txtadd').val());
+				 
 
 			console.log(kk);
 				$("#compaint_area").append(" " + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
@@ -753,15 +734,28 @@
 		$("#search_pr").keyup(function () {
 
 
+			var dev = $("#search_pr").val();
+
 		$.ajax(
 			{
 				type: 'POST',
 				dataType: 'JSON',
-				url: '/Doctor/SetCheafComplent',
-				data: { comp: dv },
+				url: '/Doctor/GetSearchMed',
+				data: { find: dev },
 				success:
 					function (response) {
-						console.log("Success");
+
+
+
+						$.each(response, function (i, item) {
+
+								$("#prescriptionsdata").append(" <option value='"+item+"' /> ");
+
+						 
+
+						});
+
+						console.log(response);
 					},
 				error:
 					function (response) {
@@ -805,5 +799,64 @@
 
 		});
 	});
+
+
+	$(function(){
+	$("#mr_ch").click(function()
+	{
+			var d = document.getElementById("TimeTab").setAttribute('value', "Morning");
+
+			alert("Morning");
+
+	});
+
+
+	$("#Af_ch").click(function()
+	{
+			var d = document.getElementById("TimeTab").setAttribute('value', "AfterNoon");
+
+
+
+	});
+
+
+	$("#N_ch").click(function()
+	{
+			var d = document.getElementById("TimeTab").setAttribute('value', "N/A");
+
+
+
+	});
+
+
+		$("#bfood").click(function () {
+			var d = document.getElementById("EatTime").setAttribute('value', "Before Food");
+
+
+
+		});
+
+
+		$("#Afood").click(function () {
+			var d = document.getElementById("EatTime").setAttribute('value', "After Food");
+
+
+
+		});
+
+
+		$("#other").click(function () {
+			var d = document.getElementById("EatTime").setAttribute('value', "Other");
+
+
+
+		});
+
+
+
+
+	});
+
+
 
 </script>

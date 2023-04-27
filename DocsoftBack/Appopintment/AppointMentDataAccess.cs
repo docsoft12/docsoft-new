@@ -130,7 +130,7 @@ namespace DocsoftBack.Appopintment
 
 		public async Task BookAppointment(ApponmentModels models)
 		{
-			var sql = @"Insert into Appoint_OPD(Consultant_ID,UHID,Fees_Received,faculty,Date_, Date_Reg,Age,Booked_By,Fees,Recept_No,Appointment_ID,Attended_Time,Ap_Time) values(@Consultant_ID,@UHID,@Fees_Received,@faculty,@Date_,@Date_Reg,@Age,@Booked_By,@Fees,@Recept_No, @Appointment_ID,@Attended_Time,@Ap_Time)";
+			var sql = @"Insert into Appoint_OPD(Consultant_ID,UHID,Fees_Received,faculty,Date_, Date_Reg,Age,Booked_By,Fees,Recept_No,Appointment_ID,Attended_Time,Ap_Time,Status) values(@Consultant_ID,@UHID,@Fees_Received,@faculty,@Date_,@Date_Reg,@Age,@Booked_By,@Fees,@Recept_No, @Appointment_ID,@Attended_Time,@Ap_Time,@Status)";
 
 		 
 

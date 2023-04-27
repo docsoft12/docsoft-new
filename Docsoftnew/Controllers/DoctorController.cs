@@ -3,6 +3,7 @@ using System.Diagnostics;
 using DocsoftBack.CommonModels;
 using DocsoftBack;
 using DocsoftBack.Doctor;
+using DocsoftBack.Doctor.Presception;
 
 namespace Docsoftnew.Controllers
 {
@@ -14,7 +15,32 @@ namespace Docsoftnew.Controllers
 			return View();
 		}
 
+
+
 		 
+
+		[HttpPost]
+		public async Task<IActionResult> AddMedicine(IDoctorCheckupModels models)
+		{
+
+			try
+			{
+				var sql = "insert into Prescription (Appointment_ID,UHID,CheckupID,Sr_No,Medicine,Dosage,Duration)values('64','20230325-5','13','1','"+models.Medicine+"','"+models.Dosage+"','"+models.Duration+"')";
+				await MainEngine.ExecuteQuery(sql,models);
+				Console.WriteLine("Success");
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+
+			return View();
+
+		}
+
+
+
+
 
 
 
@@ -41,6 +67,55 @@ namespace Docsoftnew.Controllers
 		return Json(kk);
 
 		}
+
+
+
+		public IActionResult NameList()
+		{
+			return View();
+		}
+
+
+
+		[HttpPost]
+		public  JsonResult GetSearchMed(string find)
+		{
+			List<string> GetMedi = new();
+			try
+			{
+				var sql = "select Medicine from Medicines where Medicine Like '%"+find+"%' ";
+				GetMedi =  MainEngine.GetList<string>(sql).ToList();
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+
+
+			return Json(GetMedi);
+		}
+
+
+
+
+	
+		public JsonResult GetPrescriptions()
+		{
+			List<PrescaptionModels> GetMedi = new();
+			try
+			{
+				var sql = "select * from Prescription";
+				GetMedi = MainEngine.GetList<PrescaptionModels>(sql).ToList();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+
+
+			return Json(GetMedi);
+		}
+
 
 
 
@@ -75,10 +150,20 @@ namespace Docsoftnew.Controllers
 			Console.WriteLine($"call from : Component {GetDoctorModels.Chief_Complaint}");
 
 			return Json(GetDoctorModels);
+		}		 
+
+
+		[HttpPost]
+		public async Task<JsonResult> AddMedic(string Medicine,string Duration, string QtyPer, string EatTime,string TimeTab)
+		{
+			var sql = "insert into Prescription (Appointment_ID,UHID,CheckupID,Sr_No,Medicine,Dosage,Duration)values('25','202023-25','34','800','"+Medicine+"',"+QtyPer+","+Duration+")";
+
+			await MainEngine.ExecuteQuery<string>(sql);
+
+			return  Json("Done it From AddMec");
 		}
 
-
-		public JsonResult GetComplents()
+			public JsonResult GetComplents()
 		{
 			List<string> complents = new List<string>();
 

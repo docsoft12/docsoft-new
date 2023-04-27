@@ -132,7 +132,7 @@
 
 
 
-
+	<div hidden="hidden" id="Sectioap" >
 
 		<form method="post"  >
 			<input type="text" hidden="hidden"   id="tablemasala" />
@@ -158,10 +158,7 @@
 
 
 					<input type="text"  asp-for="Ap_Time"  hidden="hidden"   id="store_list"   >
-					<ul id="time_list"   class="list-group">
-						 
-							@*<li  class="list-group-item">@item</li>*@
-	</ul>
+		
 				</div>
 
 			</div>
@@ -213,6 +210,23 @@
 	</select>
 
 		</div>
+				
+		</div>
+
+		<div class="row mt-2">
+			<div class="col-md-7">	
+				<div  style="border:inset">
+			<ul  id="time_list" style="height:80px;
+margin-left:5px;overflow-y:scroll" class="list-group">
+
+					@*<li  class="list-group-item">@item</li>*@
+				</ul>
+
+						
+		</div>
+		
+		</div>
+
 		</div>
 
 
@@ -295,22 +309,51 @@
 
 
 </form>
-
+</div>
  </div>
 
  </div>
-
-
-
-  
-
+ 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/loadash.js"></script>
 
 			  <script>
 	$(document).ready(function () {
-		$('#example').DataTable();
+		var table = $('#example').DataTable();
+
+		$('#example tbody').on('click', 'tr', function () {
+			var row_num = parseInt($(this).index());
+
+			if ($(this).hasClass('selected')) {
+				$(this).removeClass('selected');
+				const tableBody = document.querySelector('#getidhd')
+				const tableBodyRowLength = tableBody.rows.length
+
+				let deleteIndex = 0
+				for (let i = 0; i < tableBodyRowLength; i++) {
+					if (i == row_num) {
+						deleteIndex++
+					} else {
+						tableBody.deleteRow(deleteIndex)
+					}
+
+					$("#Sectioap").removeAttr("hidden");
+
+
+
+
+				}
+			 
+
+			} else {
+				table.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+				$('#Sectioap').attr('hidden', 'hidden')
+			}
+		});
+
+		
 	});
 
 				 let times;
@@ -363,14 +406,14 @@
 	$("#abtime").change(function () 
 	{
 
-		$('ul'). empty();
+		$('#time_list ul').empty();
 		$.getJSON('Home/GETLISTTIME/' + $('#abtime').val(), function (data) {
 
 
 
 			$.each(data, function (i, item) {
 
-			$("#time_list").append(" <li> " +  item+ "</li>");
+				$("#time_list").append(" <li> " + item + "</li>");
 			})
 		});
 

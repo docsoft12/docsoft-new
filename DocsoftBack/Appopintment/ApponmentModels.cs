@@ -1,6 +1,7 @@
 ﻿using DocsoftBack.Registration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,14 @@ namespace DocsoftBack.Appopintment
 		public string Search { get; set; }
 
         public int Consultant_ID { get; set; }
-
+		[Required(ErrorMessage = "Please select Apointmnet Time")]
 		public string Ap_Time { get; set; }
-        public string Time_Slot { get; set; }
+	
+		public string Time_Slot { get; set; }
 
-
-		public DateTime Attended_Time { get; set; } = DateTime.UtcNow;
+        public string Status { get; set; }
+        public DateTime Attended_Time { get; set; } = DateTime.UtcNow;
+	
 		public string faculty { get; set; }
 		public decimal Fees { get; set; }
 		public decimal Fees_Received { get; set; }

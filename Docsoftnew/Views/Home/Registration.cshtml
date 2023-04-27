@@ -91,9 +91,9 @@
 
 				<div class="col-md-11 col-sm-11 ">
 					<input asp-for="Patient_Name" type="text" class="form-control" />
+					<span asp-validation-for="Patient_Name" class="text-danger"></span>
 
 				</div>
-
 
 			</div>
 
@@ -105,7 +105,8 @@
 
 
 				<div class="col-md-5 col-sm-5 ">
-					<input asp-for="Mobile_No" type="text" class="form-control" />
+					<input asp-for="Mobile_No" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" class="form-control" />
+					<span  asp-validation-for="Mobile_No" class="text-danger"></span>
 
 				</div>
 
@@ -118,7 +119,8 @@
 
 
 				<div class="col-md-5 col-sm-5 ">
-					<input asp-for="Aadhar_No" type="text" class="form-control" />
+					<input asp-for="Aadhar_No" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  type="number" maxlength="16" class="form-control" />
+					<span asp-validation-for="Aadhar_No"  class="text-danger"></span>
 
 				</div>
 
@@ -135,21 +137,23 @@
 
 
 				<div class="col-md-2 col-sm-5 ">
-					<input asp-for="Weight" type="text" class="form-control" />
+					<input asp-for="Weight" type="number" class="form-control" />
+					<span asp-validation-for="Weight" class="text-danger"></span>
 
 				</div>
 
+
 				<div class="col-md-1 col-sm-1">
 					<label class="form-label">Age:</label>
-
 				</div>
 
 
 				<div class="col-md-2 col-sm-5 ">
-					<input type="text" class="form-control" />
-
+					<input type="number" maxlength="3" id="age_value"   oninput="age_sh()" class="form-control" />
 				</div>
 
+
+				
 
 
 				<div class="col-md-1 col-sm-1">
@@ -159,11 +163,10 @@
 
 
 				<div class="col-md-2 col-sm-2 ">
-					<input asp-for="Birthdate" type="date" class="form-control" />
+					<input asp-for="Birthdate" id="date_pic" type="date" class="form-control" />
 
 				</div>
-
-
+				
 
 				<div class="col-md-1 col-sm-1">
 					<label class="form-label">Height:</label>
@@ -173,6 +176,7 @@
 
 				<div class="col-md-2 col-sm-2 ">
 					<input asp-for="Height" type="text" class="form-control" />
+					<span asp-validation-for="Height" class="text-danger"></span>
 
 				</div>
 
@@ -187,8 +191,10 @@
 
 				<div class="col-md-11 col-sm-11 ">
 					<input asp-for="Address" type="text" class="form-control" />
+					<span asp-validation-for="Address" class="text-danger"></span>
 
 				</div>
+
 			</div>
 
 
@@ -203,6 +209,7 @@
 
 				<div class="col-md-5 col-sm-5 ">
 					<input asp-for="City" type="text" class="form-control" />
+					<span asp-validation-for="City" class="text-danger"></span>
 
 				</div>
 
@@ -218,8 +225,10 @@
 
 				<div class="col-md-5 col-sm-5 ">
 					<input asp-for="Pincode" type="text" class="form-control" />
+					<span asp-validation-for="Pincode" class="text-danger"></span>
 
 				</div>
+
 
 
 			</div>
@@ -243,6 +252,26 @@
 </div>
 
 <script>
+
+	 
+
+	function age_sh()
+	{
+		
+		var get_age = $("#age_value").val();
+
+		var age = get_age * 12;
+	 
+
+   
+const date = new Date();
+
+		date.setMonth(date.getMonth() - age);
+		document.getElementById("date_pic").valueAsDate = new Date(date);
+		 
+	}
+	 
+
 	$(function () {
 		$('#btnCapture').on('click', function () {
 			var file = document.getElementById("base64image").src;

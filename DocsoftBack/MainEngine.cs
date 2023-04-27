@@ -45,7 +45,15 @@ namespace DocsoftBack
 
 		}
 
+		public static async Task ExecuteQuery<T>(string qry)
+		{
+			using (IDbConnection conn = new SqlConnection(GetConnection))
+			{
+				var execute = await conn.ExecuteAsync(qry);
 
-    
-	 }  
+			}
+
+		}
+
+	}  
 }
