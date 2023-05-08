@@ -13,6 +13,11 @@ using Newtonsoft.Json.Serialization;
 using DocsoftBack.Doctor;
 using AspNetCore.Reporting;
 using System.Data;
+using DocsoftBack.Account;
+using System.Xml.Linq;
+ 
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Docsoftnew.Controllers
 {
@@ -47,6 +52,22 @@ namespace Docsoftnew.Controllers
             return apponments;
 		}
 
+
+
+		public string GetName(string find)
+		{
+			var sql = "Select Patient_Name from Petient_Details  where UHID = '" + find + "'";
+			return MainEngine.GetFirst<string>(sql);
+		}
+
+
+		public string GetAge(string Find)
+		{
+			var sql = "Select Birthdate from Petient_Details  where UHID = '" + Find + "'";
+			return MainEngine.GetFirst<string>(sql);
+		}
+
+
 		[HttpGet]
  public IActionResult Appointment(ApponmentModels modes)
  {
@@ -73,9 +94,23 @@ namespace Docsoftnew.Controllers
 		 public async Task<IActionResult> BookApoint(ApponmentModels modes)
 		{
 
+			decimal Age;
 
+			string kp  = GetAge(modes.UHID);
 
-			Console.WriteLine(modes.Ap_Time);
+			DateTime datetime1 = DateTime.Parse(kp);
+
+			//txt_age.Text = Convert.ToString((thisyear * 30));
+
+			Age = DateTime.Now.Year - datetime1.Year;
+			decimal thismonth = DateTime.Now.Month - datetime1.Month;
+			thismonth = thismonth / 12;
+			Age = Age + thismonth;
+
+			Age = (decimal)System.Math.Round(Age, 1);
+
+			//Console.WriteLine(modes.Ap_Time);
+			string res = (int.Parse(acp.Recipt_No("OPD", modes.Search)) + 1).ToString();
 			ApponmentModels models = new ApponmentModels()
 			{
 
@@ -84,62 +119,118 @@ namespace Docsoftnew.Controllers
 
 
 				Consultant_ID = modes.Consultant_ID,
-			 
+
 				Status = "Active",
+				Age = Age.ToString(),
 				Ap_Time = modes.Ap_Time,
 				Time_Slot = modes.Time_Slot,
 				Attended_Time = modes.Attended_Time,
 				faculty = modes.faculty,
 				Fees = modes.Fees,
 				Fees_Received = modes.Fees_Received,
-			 Recept_No = acp.Recipt_No("OPD", modes.Search),
+				Recept_No = res,
 				Booked_By = modes.Booked_By,
-				Appointment_ID = acp.APID().ToString(),
+				Appointment_ID = (int.Parse(acp.APID().ToString()) + 1).ToString(),
 				UHID = modes.UHID,
 				Date_ = DateTime.UtcNow,
 				Date_Reg = DateTime.UtcNow,
-			 
 
 
 
 
 			};
+			AccountModels account = new AccountModels()
+			{
+				Name = models.UHID,
+				Credit = models.Fees_Received.ToString(),
+				Credit_Debit = "Credit",
+				DateTime = DateTime.Now.ToString("MM-dd-yyyy HH:MM"),
+				Particular = "Consulting fees",
+				Payment_Mode = modes.Payment_Mode,
+				Payment_Ref = modes.Payment_Ref,
+				Refrence_No = models.Appointment_ID,
+				Updated_By = "Amir Test" ,
+				Payment_Of = "OPD",
+			   Bill_No = (int.Parse(res))
+			    
+			};
+
+
+
+			
+
+
+			
 
 
 			await acp.BookAppointment(models);
-			Console.WriteLine("Success");
+			await acp.AddAccount(account);
+			List<dynamic> str = MainEngine.GetList<dynamic>("select * from OPD_Bill");
 
 
-			return RedirectToRoute(new { action = "CheckUp", controller = "Doctor", area = "" });
+
+
+			int id = Convert.ToInt32(models.Appointment_ID);
+			 
+			Console.WriteLine(id);
+			string url = $"{GetApi.ApiUrl}//OPDBILL?id={id}";
+			return Redirect($"{url}");	
 		}
 
 
+
+
+		 
 
 		public IActionResult Index()
 		{
-			temp = " ";
-			return View();
+           
 
-		}
-		[HttpGet]
+            
+
+            return View();
+
+        }
+
+
+
+		[HttpPost]
+        public IActionResult Index(LoginViewModel model)
+        {
+            
+                // Check the username and password against a database or other authentication method
+                if (model.Username == "doctor" && model.Password == "lion")
+                {
+                    return RedirectToAction("Registration", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password");
+                }
+           
+
+            return View(model);
+
+
+            
+
+        }
+
+        [HttpGet]
 		public async Task<IActionResult> Registration()
 		{
-			temp = " ";
-
-
+			temp = "";
 			return View();
 		}
 
 
 		[HttpPost]
 		public async Task<IActionResult> Registration(RegisterModels models, string base64image)
-		{
+		{ 
 			try
 			{
 				var model = new CaptureModels();
-
 				string UID = reg.getid();
-
 				var files = HttpContext.Request.Form.Files;
 				if (files != null)
 				{
@@ -164,12 +255,7 @@ namespace Docsoftnew.Controllers
 								}
 
 							}
-
-
-
-
-
-							return Json(true);
+ 							return Json(true);
 						}
 						else
 						{
@@ -195,6 +281,7 @@ namespace Docsoftnew.Controllers
 					Pincode = models.Pincode,
 					Height = models.Height,
 					Reg_Date = DateTime.Parse(DateTime.Today.ToString("yyyy-MM-dd")),
+
 				  
 
 					
@@ -312,21 +399,7 @@ namespace Docsoftnew.Controllers
 			return Json(apponments);
 		}
 	 
-		public IActionResult GetPrint()
-		{
-			Console.WriteLine("Hi");
-			DataTable dt = new DataTable();
-			dt = GetDataTables();
-			string mimetype = "";
-			int extension = 1;
-			Dictionary<string, string> parameters = new Dictionary<string, string>();
-			parameters.Add("prm","RDLC Report");
-			var path = Path.Combine(_envirment.ContentRootPath,"Rports","Test.rdlc");
-			LocalReport lreport = new LocalReport(path);
-			lreport.AddDataSource("edataset",dt);
-			var result = lreport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-			return File(result.MainStream,"application/pdf");
-		}
+	
 
 		public DataTable GetDataTables()
 		{

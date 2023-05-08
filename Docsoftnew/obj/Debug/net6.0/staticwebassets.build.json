@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jKzKvyOHSsKcg7ykSLTroT9dTK5GY5yXIPdL5AfIkvg=",
+  "Hash": "hmTCpbuhv7LBzBKTp9KhAYIfkEn4lk+v7UlQRwXi+Zk=",
   "Source": "Docsoftnew",
   "BasePath": "_content/Docsoftnew",
   "Mode": "Default",
@@ -1086,6 +1086,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\boy.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\css\\prescriptiion.css",
+      "SourceId": "Docsoftnew",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\",
+      "BasePath": "_content/Docsoftnew",
+      "RelativePath": "css/prescriptiion.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\prescriptiion.css"
     },
     {
       "Identity": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\css\\site.css",

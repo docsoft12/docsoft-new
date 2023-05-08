@@ -109,8 +109,7 @@
 			 @foreach (var item in Getapponments())
 			 {
 				 <tr>
-
-							<td>
+                       <td>
 								@item.UHID
 							</td>
 							<td>
@@ -129,9 +128,7 @@
 		</tbody>
 	</table>
 
-
-
-
+	 
 	<div hidden="hidden" id="Sectioap" >
 
 		<form method="post"  >
@@ -143,9 +140,7 @@
 			<div class="col-md-2 col-sm-2" >
 	<label class="form-label">Date:</label>
 	</div>
-
-
-		
+	 	
 
 	<div class="col-md-5 col-sm-5" >
 
@@ -191,6 +186,8 @@
 	</div>
 	<div class="col-md-5 col-sm-5">
 	<select asp-for="Consultant_ID" id="getemp"    class="form-select">
+
+		              <option value="Select">Select</option>
 					@foreach (var item in mentDataAccess.GetEmployees())
 					{
 						<option value="@item.Employee_ID" >@item.Emp_Name</option>
@@ -206,7 +203,7 @@
 	</div>
 			<div class="col-md-5 col-sm-5">
 	<select id="abtime"  asp-for="Time_Slot"  class="form-select">
-		<option></option>
+		<option value="select">Select</option>
 	</select>
 
 		</div>
@@ -266,7 +263,7 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 
 		<div class="row mt-2">
 			<div class="col-md-2 col-sm-2">
-				<label class="form-label" >Fees</label>
+				<label class="form-label">Fees</label>
 			</div>
 
 				<div class="col-md-2 col-sm-2">
@@ -289,7 +286,7 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 
 
 <div class="col-md-5 col-sm-5">
-	<input  type="text" class="form-control"  />
+	<input asp-for="Payment_Ref" type="text" class="form-control"  />
 </div>
 		</div>
 		
@@ -320,9 +317,14 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 
 			  <script>
 	$(document).ready(function () {
-		var table = $('#example').DataTable();
+		var table = $('#example').DataTable({
+		 scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+		});
 
 		$('#example tbody').on('click', 'tr', function () {
+		 .
 			var row_num = parseInt($(this).index());
 
 			if ($(this).hasClass('selected')) {
@@ -367,11 +369,22 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 		times =  event.target.innerHTML;
 	 
 		document.getElementById("store_list").setAttribute('value', times);
+		if (event.target.style.backgroundColor == '') {
+		event.target.style.backgroundColor = 'lightblue';
 
-
+		}else
+		{
+		event.target.style.backgroundColor = '';
+		}
+		 
 	});
 
+	$("#time_list").mouseover(function () {
+	 
+		 
+		this.style.cursor = 'pointer';
 
+	});
 
 
 	//table get id from it
@@ -403,14 +416,13 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 
 
 
-	$("#abtime").change(function () 
-	{
+	$("#abtime").on('change', function () {
 
-		$('#time_list ul').empty();
+		$('#time_list').empty();
 		$.getJSON('Home/GETLISTTIME/' + $('#abtime').val(), function (data) {
 
 
-
+			 
 			$.each(data, function (i, item) {
 
 				$("#time_list").append(" <li> " + item + "</li>");
@@ -435,7 +447,7 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 
 			//clear the current content of the select
 			$('#abtime').empty();
-
+			
 			//iterate over the data and append a select option
 			$.each(data, function (i, item) {
 				$('#abtime').append('<option value="' + item.Start_Time + '-'+ item.End_TIme+'">'
@@ -446,7 +458,7 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 
 			//clear the current content of the select
 			$('#abtime').empty();
-
+			$('#abtime').append('<option>Select</option>');
 			//iterate over the data and append a select option
 			$.each(data, function (i, item) {
 				$('#abtime').append('<option value="' + item.Start_Time + '-'+ item.End_TIme+'">'

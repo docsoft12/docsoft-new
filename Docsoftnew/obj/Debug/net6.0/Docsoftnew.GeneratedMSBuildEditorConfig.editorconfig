@@ -24,6 +24,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/admin/source/repos/DocSoft/Docsoftnew/Views/Addmission/Addmission.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkbWlzc2lvblxBZGRtaXNzaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/admin/source/repos/DocSoft/Docsoftnew/Views/Addmission/IPDBilling.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkbWlzc2lvblxJUERCaWxsaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/admin/source/repos/DocSoft/Docsoftnew/Views/Addmission/NameAdmit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkbWlzc2lvblxOYW1lQWRtaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/admin/source/repos/DocSoft/Docsoftnew/Views/Doctor/Apoinment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEFwb2lubWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -2,17 +2,47 @@
 @{
 
 }
+ 
+@model LoginViewModel
 
-<div class="row">
-	<div class="col-md-4">
-		 <input type="text" id="first" />
-		 <input type="text" id="second" />
+ 
+
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <h3 class="mb-5">Login Doctor</h3>
+                      <form method="post" asp-action="Index">
+                       
+ 
+                          <div class="row mt-2">
+                            <input asp-for="Username" placeholder="UserID"  type="text" id="username" class="form-control" />
+                         </div>
+
+ 
+                        <div class="row mt-2">
+                            <input placeholder="Password" asp-for="Password" type="password" id="password" class="form-control" />
+                        </div>
+
+                    
+                        <div class="row mt-2">
+                        <button  class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                        </div>
+                      
+                        </form>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-		<input type="text" id="third" />
-		<button  type="button" id="test" >Submit</button>
 
-		<a class="btn btn-primary btn-sm" id="btnprint" href="../Home/GetPrint" target="_blank"  >  Print</a>
-	</div>
-</div>
+
  

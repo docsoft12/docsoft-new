@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DocsoftBack.CommonModels;
 using DocsoftBack.Doctor;
 using DocsoftBack.Recept;
+using DocsoftBack.Account;
 using System.ComponentModel.Design;
 
 namespace DocsoftBack.Appopintment
@@ -139,9 +140,20 @@ namespace DocsoftBack.Appopintment
 
 				}
 
+		public async Task AddAccount(AccountModels models)
+		{
+			var sql = @"insert into Account(Name,Particular,Credit_Debit,DateTime,Updated_By,Refrence_No,Credit,Payment_Mode,Payment_Ref,Payment_Of,Bill_No)values(@Name,@Particular,@Credit_Debit,@DateTime,@Updated_By,@Refrence_No,@Credit,@Payment_Mode,@Payment_Ref,@Payment_Of,@Bill_No)";
 
 
-    public int GetEmpID(string empname)
+
+			await MainEngine.ExecuteQuery(sql, models);
+
+
+		}
+
+
+
+		public int GetEmpID(string empname)
 		{
 			var sql = "Select Employee_ID from Employee Where  Emp_Name = '"+empname+"' ";
 

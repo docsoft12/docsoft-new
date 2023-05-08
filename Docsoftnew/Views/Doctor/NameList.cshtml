@@ -18,15 +18,15 @@
 
 
 		List<string> apponments = new();
-		List<string> TTp = new();
+		string TTp;
 		DateTime dt = DateTime.Today;
 		var sql = "";
 		DateTime dt1 = dt.AddDays(1);
 		foreach (var itme in Getapponments())
 		{
 			sql = "select Patient_Name from Petient_Details Where UHID = '"+itme.UHID+"' ";
-			TTp = MainEngine.GetList<string>(sql).ToList();
-			apponments.AddRange(TTp);
+			TTp = MainEngine.GetFirst<string>(sql);
+			apponments.Add(TTp);
 		}
 
 		return apponments;
@@ -93,10 +93,11 @@
 					
 										<td>
 											@item.Name
+										
 
 										</td>
 <td>
-	<button class="btn btn-primary btn-sm"  >Select</button>
+											<button onclick="GetCheack(@item.Apoint.Appointment_ID,@item.Apoint.UHID)" type="button" class="btn btn-primary btn-sm">Select</button>
 </td>
 					
 						</tr>
@@ -121,10 +122,33 @@
    
 				  <script>
 
-					  $(document).ready(function(){
+					   
 
-						  alert("Hello Test");
+		function GetCheack(i,b) {
 
-					  });
+		 
+
+			$.ajax(
+				{
+					type: 'POST',
+					dataType: 'JSON',
+					url: '/Doctor/GetSelect',
+					data: { apd: i, UHID: b },
+					success:
+						function (response) {
+
+						window.location.href = response.redirectUrl;
+							 
+						},
+					error:
+						function (response) {
+							alert("Error: " + response);
+						}
+				});
+
+
+						   }
+
+			 
 
 				  </script>

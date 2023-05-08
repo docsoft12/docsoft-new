@@ -18,6 +18,11 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="CrystalReports.Engine" Version="13.0.4003" />
+    <PackageReference Include="CrystalReports.ReportSource" Version="13.0.4003" />
+    <PackageReference Include="CrystalReports.Shared" Version="13.0.4003" />
+    <PackageReference Include="CrystalReports.Windows.Forms" Version="13.0.4003" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.14" />
@@ -26,6 +31,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.14" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.CodeDom" Version="7.0.0" />
+    <PackageReference Include="System.Security.Permissions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ReportDataSet\edataset.Designer.cs">
+    <Compile Update="Report\edataset.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>edataset.xsd</DependentUpon>
@@ -49,7 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ReportDataSet\edataset.xsd">
+    <None Update="Report\edataset.xsd">
       <SubType>Designer</SubType>
       <LastGenOutput>edataset.Designer.cs</LastGenOutput>
       <Generator>MSDataSetGenerator</Generator>

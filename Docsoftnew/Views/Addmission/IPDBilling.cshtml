@@ -1,0 +1,404 @@
+﻿ 
+@{
+}
+<style>
+	input[type="text"] {
+		border: 1px solid #ced4da;
+		border-radius: 4px;
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		width: 100%;
+	}
+</style>
+
+ <div class="container">
+
+	<div class="row">
+	 
+
+
+		<div class="col-md-12">
+			 
+
+
+			<div id="ipd" style="margin:5px">
+				<div class="container">
+			 <div class="row mt-2" >
+
+
+				 <div class="col-md-12" >
+			<div style="border:groove"  id="IPDP">
+				<div >
+					<table id="Pre_table" style="overflow-y:scroll;height:200px"  class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Sr.No</th>
+								<th scope="col">Description</th>
+								<th scope="col">Category</th>
+								<th scope="col">Rate</th>
+								<th scope="col">Unit</th>
+											<th scope="col">Amount</th>
+											<th scope="col">Delete</th>
+
+
+							</tr>
+						</thead>
+						<tbody id="IPDP">
+							 
+
+						</tbody>
+
+					</table>
+				</div>
+				</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		 <div   id="dywise" >
+			<div style="border:groove;margin:10px">
+			<div style="margin:10px" >
+			<div class="row mt-3">
+			 
+				<div class="col-md-3" >
+				<lable style="margin:5px" class="form-lable">Discharge Date:</lable>
+
+				</div>
+
+				<div class="col-md-8">
+					<input  type="datetime-local" class="form-control" />
+				</div>
+
+				</div>
+				
+
+
+		<div class="row mt-3">
+			 
+			<div  class="col-md-12">
+				<h3 style="margin:5px">Day Wise Calculation:</h3>
+			 
+			</div>
+
+
+		</div>
+ 
+
+
+
+	<div class="row mt-3">
+
+	 <div class="col-md-12">
+		 <div style="border:groove">
+
+			 <div class="row mt-2">
+				 <div class="col-md-3">
+												<lable style="margin:5px" class="form-lable">Bed Type:</lable>
+
+					 
+</div>
+
+
+<div class="col-md-4">
+												<lable id="btype" style="margin:5px" class="form-lable"></lable>
+
+</div>
+			 </div>
+										<div class="row mt-2">
+											<div class="col-md-3">
+												<lable style="margin:5px" class="form-lable">Total Days:</lable>
+
+
+											</div>
+
+
+											<div class="col-md-4">
+												<lable id="tdays" style="margin:5px" class="form-lable"></lable>
+
+											</div>
+										</div>
+
+
+										<div class="row mt-2">
+											<div class="col-md-3">
+												<lable style="margin:5px" class="form-lable">Round Days:</lable>
+
+
+											</div>
+
+
+											<div class="col-md-4">
+												 <input type="text" class="form-control" id="rdays" />
+											</div>
+										</div>
+
+
+										<div class="row mt-2">
+											<div class="col-md-3">
+												<lable style="margin:5px" class="form-lable">Charges Per Day:</lable>
+
+
+											</div>
+
+
+											<div class="col-md-4">
+												<input type="text" class="form-control" id="crdays" />
+											</div>
+										</div>
+
+
+
+									 
+										<div class="row mt-2">
+
+											 
+												<div class="col-md-3">
+												<lable	 style="margin:5px" class="form-lable">Total Charges:</lable	>
+
+
+											</div>
+
+
+											<div class="col-md-4">
+												<input type="text" class="form-control" id="tcharges" />
+											</div>
+											 
+
+										</div>
+
+
+									
+
+										 
+
+		 </div>
+
+
+									<div class="row mt-2">
+										<div class="col-md-3">
+											<button type="button" class="btn-secondary">Add Room Charges</button>
+										</div>
+									</div>
+	 </div>
+  </div>
+     
+
+
+
+		</div>
+
+					
+			</div>
+ 
+
+
+
+			<div class="container">
+				<div class="row mt-2">
+
+
+					<div class="col-md-3">
+						<button id="gotonext" type="button" class="btn btn-primary">Next</button>
+
+					</div>
+
+
+				</div>
+
+			</div>
+				
+			
+
+
+		
+	</div>
+
+
+			
+
+			<div hidden="hidden" id="next">
+				<div style="border:groove;margin:10px">
+					<div>
+						 
+						 
+
+						<div class="row mt-3">
+
+							<div class="col-md-12">
+							 
+
+								 <div style="margin:10px" class="row mt-2">
+
+									 <div   class="col-md-4">
+										 <label class="form-label" >Description</label>
+
+</div>
+										<div   class="col-md-2">
+											<label class="form-label">Categary</label>
+
+										</div>
+
+										<div    class="col-md-2">
+											<label class="form-label">Rate</label>
+
+										</div>
+										<div   class="col-md-1">
+											<label class="form-label">Unit</label>
+
+										</div>
+
+												<div    class="col-md-2">
+											<label class="form-label">Amount</label>
+
+										</div>
+								
+						
+
+
+								<div class="container">
+									<div class="row mt-2">
+										<div class="col-sm-6 col-md-4 mb-2">
+											<select class="form-select" id="desc"></select>
+										</div>
+										<div class="col-sm-6 col-md-2 mb-2">
+											<input type="text" class="form-control" />
+										</div>
+										<div class="col-sm-6 col-md-2 mb-2">
+											<input type="text" class="form-control" />
+										</div>
+										<div class="col-sm-6 col-md-1 mb-1">
+											<input type="text" class="form-control" />
+										</div>
+											<div class="col-sm-6 col-md-2 mb-2">
+												<input type="text" class="form-control" />
+											</div>
+										<div class="col-sm-6 col-md-1 mb-1">
+											<button class="btn-success btn-sm">Add</button>
+										</div>
+
+
+										
+
+									</div>
+								</div>
+
+
+								<div class="container">
+
+									<div class="row mt-2">
+										<div class="col-md-3" >
+											<h4>Total Amount :</h4>
+</div>
+
+<div class="col-md-5">
+
+</div>
+									</div>
+</div>
+
+
+                                 <div class="container">
+									 <div class="row mt-2">
+										 <div class="col-md-1">
+											 <label   class="form-label">Discount</label>
+</div>
+
+<div class="col-md-1">
+	<input type="number" class="form-control" />
+</div>
+
+<div class="col-md-5">
+	<input type="text" class="form-control" />
+</div>
+								 </div>
+
+								</div>
+
+
+									<div class="container">
+										<div class="row mt-2">
+											<div class="col-md-3">
+												<label class="form-label">Bill Amount After Discount</label>
+											</div>
+
+											<div class="col-md-4">
+												<input type="number" class="form-control" />
+											</div>
+
+										 
+										</div>
+
+									</div>
+
+
+
+						 
+	</div>
+								</div>
+
+
+
+					</div>
+
+					 
+					 
+
+
+
+				</div>
+
+
+			</div>
+
+				<div class="container">
+					<div class="row mt-2">
+
+
+						<div  class="col-sm-6 col ">
+							<button type="button" class="btn btn-primary  ">Save Bill</button>
+
+						</div>
+
+							 
+					</div>
+
+				</div>
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+ 
+	</div>
+</div>
+
+
+ <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+			<script>
+
+
+
+	$(function () {
+		$("#gotonext").click(function () {
+
+			// $('#viltas_div').attr( 'hidden','1000');
+			$("#next").removeAttr("hidden");
+			$('#dywise').attr('hidden', 'hidden');
+		 
+
+		});
+	});
+</script>

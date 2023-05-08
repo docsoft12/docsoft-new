@@ -34,7 +34,9 @@ namespace DocsoftBack.Appopintment
 		public int id { get; set; }
         public string Source { get; set; }
 		public string Payment_Mode { get; set; }
- 
+		public string Payment_Ref { get; set; }
+
+
 
 
 

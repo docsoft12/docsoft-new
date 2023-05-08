@@ -42,15 +42,12 @@
 
 
 <div style="border:groove;background-color:white">
-	<div class="container-fluid mt-4">
+	<div style="margin:5px" class="container-fluid mt-4">
 
 
 
 		<form asp-action="Registration" method="post">
-
-
-
-
+			 
 			<div class="row mt-2">
 
 				
@@ -79,41 +76,54 @@
 				</div>
 
 </div>
-
-
+  
 			<hr />
-			<div class="row">
+			<div class="row	">
+				<div class="col-md-1 col-sm-1">
+					<label class="form-label">Mobile No:</label>
+				</div>
+				 	<div class="col-md-5 col-sm-5 ">
+					<input asp-for="Mobile_No" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" class="form-control" />
+					<span asp-validation-for="Mobile_No" class="text-danger"></span>
+
+				</div>
+				 <div class="col-md-1 col-sm-1">
+					<label class="form-label">Gender:</label>
+ 				</div>
+
+
+				<div class="col-md-5 col-sm-5 ">
+			 
+					<select asp-for="Sex" id="select_mall" class="form-select"  >
+						<option value="Male">Male</option>
+						<option value="Female" >Female</option>
+						<option value="Other" >Other</option>
+
+					</select>
+			 
+
+				</div>
+
+
+			</div>
+
+			<div class="row mt-2">
 				<div class="col-md-1 col-sm-1">
 					<label class="form-label">Name:</label>
 
 				</div>
 
 
-				<div class="col-md-11 col-sm-11 ">
-					<input asp-for="Patient_Name" type="text" class="form-control" />
-					<span asp-validation-for="Patient_Name" class="text-danger"></span>
-
-				</div>
-
-			</div>
-
-			<div class="row mt-2">
-				<div class="col-md-1 col-sm-1">
-					<label class="form-label">Mobile No.:</label>
-
-				</div>
-
-
 				<div class="col-md-5 col-sm-5 ">
-					<input asp-for="Mobile_No" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" class="form-control" />
-					<span  asp-validation-for="Mobile_No" class="text-danger"></span>
+					<input asp-for="Patient_Name" type="text"  class="form-control" />
+					<span  asp-validation-for="Patient_Name" class="text-danger"></span>
 
 				</div>
 
 
 
 				<div class="col-md-1 col-sm-1">
-					<label class="form-label">Aadhar No.:</label>
+					<label class="form-label">Aadhar No:</label>
 
 				</div>
 

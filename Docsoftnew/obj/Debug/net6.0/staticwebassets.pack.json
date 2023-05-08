@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\boy.jpg"
     },
     {
+      "Id": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\css\\prescriptiion.css",
+      "PackagePath": "staticwebassets\\css\\prescriptiion.css"
+    },
+    {
       "Id": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

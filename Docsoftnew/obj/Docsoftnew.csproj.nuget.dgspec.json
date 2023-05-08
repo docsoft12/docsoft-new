@@ -113,6 +113,26 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "CrystalReports.Engine": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "CrystalReports.ReportSource": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "CrystalReports.Shared": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "CrystalReports.Windows.Forms": {
+              "target": "Package",
+              "version": "[13.0.4003, )"
+            },
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
             "Microsoft.AspNetCore.Components": {
               "target": "Package",
               "version": "[6.0.15, )"
@@ -142,6 +162,10 @@
               "version": "[13.0.3, )"
             },
             "System.CodeDom": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Security.Permissions": {
               "target": "Package",
               "version": "[7.0.0, )"
             }
