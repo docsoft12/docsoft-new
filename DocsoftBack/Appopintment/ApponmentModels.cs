@@ -15,8 +15,9 @@ namespace DocsoftBack.Appopintment
         public int Consultant_ID { get; set; }
 		[Required(ErrorMessage = "Please select Apointmnet Time")]
 		public string Ap_Time { get; set; }
-	
-		public string Time_Slot { get; set; }
+
+		public string Url { get; set; } = "Suc";
+        public string Time_Slot { get; set; }
 
         public string Status { get; set; }
         public DateTime Attended_Time { get; set; } = DateTime.UtcNow;

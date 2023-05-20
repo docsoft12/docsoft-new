@@ -8,6 +8,8 @@
 
 }
 
+
+
 @model DocsoftBack.Doctor.DoctorCheckupModels
 
 <style>
@@ -20,15 +22,67 @@
 		width: 100%;
 	}
 
+	.event_list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0;
+		list-style: none;
+	}
+
+		.event_list li {
+			margin-bottom: 10px;
+			padding: 5px;
+			background-color: #f0f0f0;
+		}
+
 	datalist {
 		max-height: 200px;
 		overflow: auto;
 	}
 
+
+	.group-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.group-box h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.group-box-content {
+  padding: 10px;
+}
+
 </style>
 <link href="~/css/prescriptiion.css" rel="stylesheet" />
 
 <div class="container">
+
+
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alert alert-danger">
+			@TempData["ErrorMessage"]
+		</div>
+
+
+	}
+
+	@if (TempData["SuccessMessage"] != null)
+	{
+		<div class="alert alert-success">
+			@TempData["SuccessMessage"]
+		</div>
+
+
+
+	}
+
 
 	<input type="text" asp-for="DocAdd"    hidden="hidden" id="component_section" />
 
@@ -49,7 +103,7 @@
 
 
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<div class="row mt-1" >
 				<div class="col">
 					<button id="cheaf_button" onclick="cf" class="btn btn-primary" style="width:200px">
@@ -123,7 +177,7 @@
 
 			</div>
 
-		<div class="col-md-8">
+		<div class="col-md-9">
 
 
 
@@ -164,6 +218,8 @@
 
 
 						</div>
+						</div>
+
 				
 			
 
@@ -172,33 +228,28 @@
 						<div style="border:groove;height:200px;overflow-y:auto; overflow-x:hidden;margin:10px" >
 
 							<div class="row" >
-								<div class="col-md-4">
-									<ul class="event_list" id="list1">
+								<div class="col-md-12">
+								 
+															<ul class="event_list" id="list1">
+ 
 
 									</ul>
-								</div>
+								 				
+								
 
-								<div class="col-md-4">
-
-									<ul class="event_list1"  id="list2" >
-
-									</ul>
-								</div>
-								<div class="col-md-4">
-									<ul class="event_list2" id="list3">
-
-									</ul>
-								</div>
 							</div>
 
 						</div>
 					</div>
 				</div>
-				<div style="margin:10px" class="row mt-2">
-					<div class="col">
+				<div class="container">
+					<div style="margin:10px;border:groove" class="row mt-2">
+								<div style="margin:10px" class="col">
 						<textarea id="cheaf_data"  asp-for="Chief_Complaint"  id="compaint_area" rows="3" class="form-control" ></textarea>
 					</div>
 				</div>
+				</div>
+				
 
 				</div>
 				</div>
@@ -213,9 +264,10 @@
 			  </div>
 
 			 <div id="viltas_div" hidden="hidden" > 
-				 <div   class="row mt-1">
+				 <div class="container" >
+				 <div  style="border:groove;margin:10px" class="row mt-1">
 					  
-					<div style="border:groove">
+					<div >
 
 					<div style="margin-top:10px" class="row mt-2" >
 					<div  style="color:black"  class="col-md-2">
@@ -302,16 +354,20 @@
 
 
 				</div>
-				<div class="row mt-2">
+				</div>
+				<div style="margin:10px" class="row mt-2">
 					<div class="col-md-12">
 						<button id="gotopresc" type="button" class="btn btn-primary ">Next(Prescriptions)</button>
 					</div>
 				</div>
 
 			</div>
+ 
+
 
 			<div id="prs_div" hidden="hidden">
-				<div style="border:groove">
+				<div class="container" >
+				<div style="border:groove;margin:10px">
 				 <form id="prescriptions_form">
 
 					 <div style="margin:10px;font-size:13px" class="row mt-1">
@@ -329,7 +385,7 @@
 
 					   <div style="font-size:13px" class="col-sm-6 col-md-4 md-4">
 								<input autocomplete="off" asp-for="Medicine"  list="prescriptionsdata" id="search_pr" placeholder="Prescriptions..."  class="form-control" />
-						   <datalist style="height:200px;" id="prescriptionsdata">
+						   <datalist style="max-height:200px;overflow-y:scroll" id="prescriptionsdata">
 							  </datalist>
 
 						  </div>
@@ -427,10 +483,10 @@
 				</form>
 					</div>
 
-
-					<div class="row mt-3">
+					<div style="border:groove;margin:10px">
+					<div style="margin:10px" class="row mt-3">
 						<div  class="col">
-						<div style="border:groove">
+						 
 							<table id="Pre_table" style="height:320px" class="table table-hover">
   <thead>
 	<tr>
@@ -455,20 +511,23 @@
 						</div>
 
 						</div>
-					<div class="row mt-2">
+					<div style="margin:10px" class="row mt-2">
 						<div class="col">
 						<button id="gotonotes" type="button" class="btn btn-primary ">Next(Notes)</button>
 						</div>
 						</div>
 
 					</div>
+					</div>
+
 
 
 
 			<div id="note_div" hidden="hidden">
 
-
-<div class="row mt-2" >
+				<div class="container">
+					<div style="border:groove">
+<div style="margin:10px;" class="row mt-2" >
 
 
 	<div class="col">
@@ -479,7 +538,7 @@
 
 
 
-				<div class="row mt-2">
+				<div style="margin:10px;" class="row mt-2">
 
 
 					<div class="col">
@@ -488,14 +547,21 @@
 
 				</div>
 
-
-				<div class="row mt-2">
+				<div style="margin:10px;" class="row mt-2">
 					<div class="col">
 						<button id="gotoexamin" type="button" class="btn btn-primary ">Next(Examination)</button>
 					</div>
 				</div>
+				 
+
+
 				</div>
-			<div id="exam_div" style="border:groove" hidden="hidden">
+
+
+				</div>
+				</div>
+
+			<div id="exam_div" style="border:groove;margin:15px" hidden="hidden">
 
 				    <div style="margin:10px" class="row mt-2" >
 
@@ -591,14 +657,13 @@
 		var e = $("#Evening").val();
 		var ts = $("#EatTime").val();
 		var get_s = $("#get_tab").val();
-
+		var medic = $("#search_pr").val();
+	var drsh = 	$("#drtion").val();
 	var new_s;
            
 		new_s = "" + m + "" + a + "" + e + "(" + ts + "-" + dosage + "-" + get_s + ")";
-		   
-
-
-
+		 if(dosage!="" && medic!=""  && ts!="" && drsh!="" ) 
+		{
 		$.ajax({
 			type: 'POST',
 			url: '/Doctor/AddMedic',
@@ -634,9 +699,11 @@
 
 		}
 		var newrow = '<tr><td> ' + rownumber + ' </td><td>' + med + '</td><td>' + new_s + '</td><td>' + duration + '-Days</td><td><button type="button" class="del-row btn-primary btn-sm">Delete</button></td></tr>';
-
-			$('#Pre_table tr:last').after(newrow);
-			 
+		 $('#Pre_table tr:last').after(newrow);
+		 }
+			 else{
+				 alert("Please proper data Submit");
+			 }
  
 	 }
 
@@ -647,6 +714,7 @@
 			table.rows[i].cells[0].innerHTML = i;
 		}
 	}
+
 $('#Pre_table').on('click', '.del-row', function() {
 
 
@@ -752,16 +820,9 @@ $('#Pre_table').on('click', '.del-row', function() {
 			$('#prs_div').attr('hidden', 'hidden');
 			$('#note_div').attr('hidden', 'hidden');
 			$('#exam_div').attr('hidden', 'hidden');
-
-
-
-
 		});
 	});
-
-
-
-
+	 
 		$(function () {
 		$("#gotopresc").click(function () {
 
@@ -904,39 +965,82 @@ $('#Pre_table').on('click', '.del-row', function() {
 		var kk = $('#txtadd').val();
 
 		//txtadd
-			$.getJSON('Doctor/AddComplaint/'+ kk, function (data) {
 
-				 
-				$("#cheaf_data").append(" " + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
 
-				$("#list1").append("<li>" +$('#txtadd').val() + "</li>");
+		$.ajax(
+			{
+				type: 'POST',
+				dataType: 'JSON',
+					url: '/Doctor/AddComplaint',
+				data: { kk:kk },
+				success:
+					function (response) {
 
-				//complaint_area
-				//from_t
-				//from_date
+						$("#cheaf_data").append(" " + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
 
+				$("#list1").append("<li><button style='margin:5px'  class='btn btn-secondary btn-sm' value="+$('#txtadd').val() +">" +$('#txtadd').val() + "</button></li>");
+
+
+					 
+
+						console.log(response);
+					},
+				error:
+					function (response) {
+						alert("Error: " + response);
+					}
 			});
+
+
+
+		 
 	});
 
 	});
 
-	$(function(){
-	$("ul.event_list").click(function()
-	{
-		var items = document.querySelectorAll("ul li");
-		items.forEach(function(item){
 
-			item.addEventListener('click',function(e){
 
-					var d = document.getElementById("txtSearch").setAttribute('value', this.innerText);
 
+		$(function () {
+			$("#list1").on("click", "li", function () {
+				var clickedItemText = $(this).text();
+				$("#txtSearch").val(clickedItemText);
+			 
 			});
-
 		});
 
-	});
-	});
 
+
+	$(document).ready(function() {
+			 
+	$.ajax(
+			{
+				type: 'GET',
+				dataType: 'JSON',
+					url: '/Doctor/GetComplents',
+				data: {  },
+				success:
+					function (response) {
+
+
+
+						$.each(response, function (i, item) {
+
+				$("#list1").append("<li><button style='margin:5px'  class='btn btn-secondary btn-sm' value="+item+">" +item+ "</button></li>");
+								 
+ 
+						});
+
+						console.log(response);
+					},
+				error:
+					function (response) {
+						alert("Error: " + response);
+					}
+			});
+
+
+	});
 
 
 
@@ -1066,6 +1170,7 @@ $('#Pre_table').on('click', '.del-row', function() {
 
 
 
+ 
 
 
 	$("#txtSearch").keyup(function () {
@@ -1081,23 +1186,7 @@ $('#Pre_table').on('click', '.del-row', function() {
 
 		});
 
-		$('#list2 > li').each(function () {
-
-			var currentLiText = $(this).text(),
-				showCurrentLi = currentLiText.indexOf(searchText) !== -1;
-
-			$(this).toggle(showCurrentLi);
-
-		});
-
-		$('#list3 > li').each(function () {
-
-			var currentLiText = $(this).text(),
-				showCurrentLi = currentLiText.indexOf(searchText) !== -1;
-
-			$(this).toggle(showCurrentLi);
-
-		});
+	 
 	});
 
 
@@ -1106,20 +1195,22 @@ $('#Pre_table').on('click', '.del-row', function() {
 	{
 
 
+			$("#Evening").empty();
  
 
 
 		   	var n = $("#TimeTab").val();
-		
-		if(n!="")
+
+			if ($(this).is(":checked")) {
+				var d = document.getElementById("TimeTab").setAttribute('value', "Morning-");
+
+			 
+		}else
 		{
 			$("#TimeTab").empty();
 
-			alert("");
-		}else if(n == "")
-		{
-				var d = document.getElementById("TimeTab").setAttribute('value', "Morning-");
 			}
+
 
 
 
@@ -1130,67 +1221,76 @@ $('#Pre_table').on('click', '.del-row', function() {
 	$("#Af_ch").click(function()
 	{
 		
+				$("#Afternoon").empty();
 		  
 
 		   	var n = $("#Afternoon").val();
 		
-		if(n!="")
+		if ($(this).is(":checked"))
 		{
-		 $("#Afternoon").empty();
-
-		}else if(n == "")
-		{
+			if($("#Afternoon").val()=="")
+				{
 			var d = document.getElementById("Afternoon").setAttribute('value', "Afternoon-");
+				}
+
+		}else
+		{
+				$("#Afternoon").empty();
+
 	}	 
 		
 			
 			 
   	});
 
-
-	$("#N_ch").click(function()
-	{
-			var n = $("#Evening").val();
-		
-		if(n!="")
-		{
+		$("#N_ch").click(function () {
 			$("#Evening").empty();
 
-		}else if(n == "")
-		{
-			var d = document.getElementById("Evening").setAttribute('value', "Evening-Night-");
-		}	 
-			
+			if ($(this).is(":checked")) {
+				if($("#Evening").val()=="")
+				{
 
+				
+				$("#Evening").val("Evening-Night-");
+				}else{
+					$("#Evening").empty();
 
-			  
-	});
+				}
+			} else {
+				$("#Evening").empty();
 
+			}
+		});
 
 		$("#bfood").click(function () {
-			var d = document.getElementById("EatTime").setAttribute('value', "Before Food");
-
-
-
+			if ($(this).is(":checked")) {
+				$("#EatTime").val("Before Food");
+			} else {
+				if (!$("#Afood").is(":checked") && !$("#other").is(":checked")) {
+					$("#EatTime").val("");
+				}
+			}
 		});
-
 
 		$("#Afood").click(function () {
-			var d = document.getElementById("EatTime").setAttribute('value', "After Food");
-
-
-
+			if ($(this).is(":checked")) {
+				$("#EatTime").val("After Food");
+			} else {
+				if (!$("#bfood").is(":checked") && !$("#other").is(":checked")) {
+					$("#EatTime").val("");
+				}
+			}
 		});
-
 
 		$("#other").click(function () {
-			var d = document.getElementById("EatTime").setAttribute('value', "Other");
-
-
-
+			if ($(this).is(":checked")) {
+				$("#EatTime").val("Other");
+			} else {
+				if (!$("#bfood").is(":checked") && !$("#Afood").is(":checked")) {
+					$("#EatTime").val("");
+				}
+			}
 		});
-
-
 
 
 	});
@@ -1221,7 +1321,12 @@ $('#Pre_table').on('click', '.del-row', function() {
 
 
 	$("#addDoctor").click(function(){
-		 
+	
+		
+
+
+if( $("#next_date").val() !="" && $("#pulse").val() !="" && $("#apoint_ted").val()!="" && $("#bp").val()!="" && $("#fever").val()!="" && $("#cheaf_data").val()!="" && $("#Spo2").val()!=""&& $("#PA").val()!=""  )
+{
 	$.ajax({
 		type: 'POST',
 			dataType: 'JSON',
@@ -1240,14 +1345,31 @@ $('#Pre_table').on('click', '.del-row', function() {
 			PA: $("#PA").val()},
 	 
 		success: function (result) {
-			window.location.href = result.redirectUrl;
+
+
+			
+		fetch(result.redirectUrl)
+			.then(response => response.blob())
+			.then(blob => {
+				var url = URL.createObjectURL(blob);
+				window.open(url, "_blank","width=800,height=600");
+			})
+			.catch(error => {
+				console.log("Error fetching PDF:", error);
+			});
+			 
 		},
 		error: function () {
 			console.log('Failed ');
 		}
 	});
+	}
+	
 
-	});
+else{
+	alert("Please submit proper data");
+}
+});
 
 
 

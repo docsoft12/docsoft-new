@@ -1,7 +1,7 @@
 ﻿@using DocsoftBack.Appopintment;
 @using DocsoftBack;
 @using DocsoftBack.Addmission;
-@{
+@{ 
 
 	AppointMentDataAccess mentDataAccess = new();
 
@@ -24,18 +24,49 @@
 		var sql = "select Bed_type, count(Status) As Status, Avg(Charges) As Charges from Bed_Status group by Bed_type";
 		return MainEngine.GetList<BedModels>(sql).ToList();
 	}
-
-	
-
-
+ 
 
 }
 @model IPDAddmissionModels 
 
+<style>
 
+	.event_list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0;
+		list-style: none;
+	}
+
+		.event_list li {
+			margin-bottom: 10px;
+			padding: 5px;
+			background-color: #f0f0f0;
+		}
+</style>
 
 
 <div class="container">
+
+	@if (TempData["SuccessMessage"] !=null)
+	{
+        
+			<div class="alert alert-success">
+				@TempData["SuccessMessage"]
+			</div>
+ 
+		
+	}
+
+
+
+	@if (TempData["ErrorMessage"] !=null)
+	{
+		<div class="alert alert-danger">
+			@TempData["ErrorMessage"]
+		</div>
+	}
 
 	<div class="row">
 		<div class="col-md-3">
@@ -84,7 +115,7 @@
 
 
 		<div class="col-md-9">
-			<form method="post"  asp-controller="Addmission">
+			<form method="post">
 				<input type="text" asp-for="Bed_No" id="bednumber" hidden="hidden" />
 				<input type="text" asp-for="UHID" id="getuhd" hidden="hidden" />
 
@@ -375,120 +406,85 @@
 			</div>
 
 
-			<div hidden="hidden" id="cheaf_div">
+				<div hidden="hidden" id="cheaf_div">
 
+					<div class="container">
+						<div style="border:groove;margin:10px">
 
-				<div style="border:none">
+							<div style="margin:10px" class="row mt-2">
+								<div class="col-sm-6 col-md-5 mb-5">
 
-					<div class="row mt-2">
+									<input id="txtSearch" type="text" class="form-control" placeholder="Adding new complaint">
 
-
-						<div class="col-md-5">
-
-							<input id="txtSearch" type="text" style="font-size:11px" class="form-control" placeholder="Adding new complaint">
-
-
-							<input type="text" hidden="hidden" id="txtadd" />
-						</div>
-
-
-
-						<div class="col-1">
-							<label style="margin-top:5px;font-size:11px" class="form-label">From</label>
-
-
-						</div>
-						<div class="col-md-2">
-							<input id="from_t" style="font-size:11px" type="text" class="form-control" />
-						</div>
-
-						<div class="col-md-3">
-							<select id="from_date" style="font-size:11px" class="form-select">
-								<option value="Days">Days</option>
-								<option value="Weeks">Weeks</option>
-								<option value="Months">Months</option>
-								<option value="Years">Years</option>
-
-							</select>
-						</div>
-
-						<div class="col-md-1">
-							<button id="addDoc" type="button" style="font-size:11px" class="btn btn-warning">Add</button>
-						</div>
-					</div>
-
-					<div class="row mt-1">
-						<div class="col-md-12">
-							<div style="border:groove;height:200px;overflow-y:auto; overflow-x:hidden;">
-
-								<div class="row">
-									<div class="col-md-4">
-										<ul class="event_list" id="list1">
-										</ul>
-									</div>
-
-									<div class="col-md-4">
-
-										<ul class="event_list1" id="list2">
-										</ul>
-									</div>
-									<div class="col-md-4">
-										<ul class="event_list2" id="list3">
-										</ul>
-									</div>
+									<input type="text" hidden="hidden" id="txtadd" />
 								</div>
+								<div class="col-sm-6 col-md-1 mb-1">
+									<label style="margin-top:5px;" class="form-label">From</label>
+								</div>
+								<div class="col-sm-6 col-md-2 mb-2">
+									<input id="from_t" type="text" class="form-control" />
+								</div>
+								<div class="col-sm-6 col-md-3 mb-3">
+									<select id="from_date" class="form-select">
+										<option value="Days">Days</option>
+										<option value="Weeks">Weeks</option>
+										<option value="Months">Months</option>
+										<option value="Years">Years</option>
+
+									</select>
+								</div>
+
+								<div class="col-sm-6 col-md-1 mb-1">
+									<button id="addDoc" type="button" class="btn btn-warning btn-sm">Add</button>
+								</div>
+
+
+
 
 							</div>
 						</div>
-					</div>
-					<div class="row mt-2">
-						<div class="col">
-							<textarea asp-for="Chief_Complaint" id="cheaf_data"    rows="3" class="form-control"></textarea>
+
+
+
+
+						<div class="row mt-1">
+							<div class="col-md-12">
+								<div style="border:groove;height:200px;overflow-y:auto; overflow-x:hidden;margin:10px">
+
+									<div class="row">
+										<div class="col-md-12">
+
+											<ul class="event_list" id="list1">
+											</ul>
+
+
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<div style="margin:10px;border:groove" class="row mt-2">
+									<div style="margin:10px" class="col">
+										<textarea id="cheaf_data" asp-for="Chief_Complaint" id="compaint_area" rows="3" class="form-control"></textarea>
+									</div>
+								</div>
+							</div>
+
+
 						</div>
 					</div>
+					 
 
 				</div>
-
-
-				<div class="row mt-2">
-
-					<div class="col-md-3">
-						<label class="form-label">Secondary Doctor</label>
-
-					</div>
-					<div class="col-md-9">
-						<select id="getdoctor" class="form-select">
-							@foreach (var item in mentDataAccess.GetEmployees())
-							{
-								<option value="@item.Emp_Name">@item.Emp_Name</option>
-							}
-						</select>
-					</div>
-				</div>
-
-				<div class="row mt-2">
-					<div class="col-md-3">
-                  <label  class="form-label">Diagnose</label>
-
-</div>
-
-<div class="col-md-9">
-	<textarea asp-for="Diagnose"  class="form-control" rows="3" ></textarea>
-
-</div>
-
-
-				</div>
-
-				
-			</div>
 			<div hidden="hidden" id="admit">
 				<div class="container" >
 			<div class="row mt-2">
 
 
 						<div class="col-md-3">
-							<button  asp-action="Addmission" type="submit" class="btn btn-primary btn-lg btn-block">Admit</button>
+								<button asp-action="Addmission" asp-controller="Addmission" class="btn btn-primary btn-lg btn-block">Admit</button>
 
 						</div>
 
@@ -502,8 +498,8 @@
 				</div>
 			</div>
 
-
 			</form>
+			 
 	
 		 
 	 </div>
@@ -536,7 +532,7 @@
 			var d = document.getElementById("getuhd").setAttribute('value', col2Value);
 
 
-			alert(col2Value);
+			 
 
 		 
 
@@ -617,7 +613,7 @@
 							 $("#listbed").empty();
 							$.each(response, function (i, item) {
 							
-								$("#listbed").append(" <li style='background-color:yellow' > " + item + "</li>");
+								$("#listbed").append(" <a   class='list-group-item list-group-item-action'>"+item+"</a>");
 			})
 						},
 					error:
@@ -632,29 +628,92 @@
 	});
 
 
+
+	$(function () {
+		$("#list1").on("click", "li", function () {
+			var clickedItemText = $(this).text();
+			$("#txtSearch").val(clickedItemText);
+
+		});
+	});
+
+
+	$(document).ready(function () {
+
+		$.ajax(
+			{
+				type: 'GET',
+				dataType: 'JSON',
+				url: '/Doctor/GetComplents',
+				data: {},
+				success:
+					function (response) {
+
+
+
+						$.each(response, function (i, item) {
+
+							$("#list1").append("<li><button type='button' style='margin:5px'  class='btn btn-secondary btn-sm' value=" + item + ">" + item + "</button></li>");
+
+
+						});
+
+						console.log(response);
+					},
+				error:
+					function (response) {
+						alert("Error: " + response);
+					}
+			});
+
+
+	});
+
+
+
+
 	$(function () {
 		$("#addDoc").click(function () {
+			
 			var mk = $("#txtSearch").val();
 			var d = document.getElementById("txtadd").setAttribute('value', mk);
 
 			var kk = $('#txtadd').val();
 
 			//txtadd
-			$.getJSON('Doctor/AddComplaint/' + kk, function (data) {
 
 
-				$("#cheaf_data").append(" " + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
+			$.ajax(
+				{
+					type: 'POST',
+					dataType: 'JSON',
+					url: '/Doctor/AddComplaint',
+					data: { kk: kk },
+					success:
+						function (response) {
 
-				$("#list1").append("<li>" + $('#txtadd').val() + "</li>");
+							$("#cheaf_data").append(" " + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
 
-				//complaint_area
-				//from_t
-				//from_date
+							$("#list1").append("<li><button type='button' style='margin:5px'  class='btn btn-secondary btn-sm' value=" + $('#txtadd').val() + ">" + $('#txtadd').val() + "</button></li>");
 
-			});
+
+
+
+							console.log(response);
+						},
+					error:
+						function (response) {
+							alert("Error: " + response);
+						}
+				});
+
+
+
+
 		});
 
 	});
+
 
 
 
@@ -759,7 +818,7 @@
 	 
 		document.getElementById("bednumber").setAttribute('value', times);
 
-		alert(times);
+		 
 		if (event.target.style.backgroundColor == '') {
 		event.target.style.backgroundColor = 'lightblue';
 

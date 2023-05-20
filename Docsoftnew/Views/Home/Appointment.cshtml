@@ -27,7 +27,32 @@
 		
 
 <div class="container" >
+	  
 
+	<input type="text" hidden="hidden" id="geturl" asp-for="Url" />
+	 
+	@if(TempData["ErrorMessage"]!=null)
+	{
+			<div class="alert alert-danger">
+			@TempData["ErrorMessage"]
+		</div>
+
+
+	}
+
+	@if(TempData["SuccessMessage"]!=null)
+	{
+		<div class="alert alert-success">
+			@TempData["SuccessMessage"]
+		</div>
+		 
+ 
+
+	}
+
+ 
+
+  
 	@*<form method="post" >
 	<div class="row mt-1">
 		 
@@ -134,7 +159,7 @@
 		<form method="post"  >
 			<input type="text" hidden="hidden"   id="tablemasala" />
 
-			<input hidden="hidden"  asp-for="@Model.UHID" id="doctorm"  />
+			<input hidden="hidden" type="text"  asp-for="UHID" id="doctorm"  />
 		<div  class="row mt-2">
 	
 			<div class="col-md-2 col-sm-2" >
@@ -289,23 +314,13 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 	<input asp-for="Payment_Ref" type="text" class="form-control"  />
 </div>
 		</div>
-		
-	
 		<div class="row mt-3">
 			<div class="col-md-4">
-				<button asp-controller="Home" asp-action="BookApoint" type="submit" class="btn btn-warning btn-sm" >Book Apoitment</button>
+						<button asp-controller="Home"  asp-action="BookApoint" type="submit" class="btn btn-warning btn-sm">Book Apoitment</button>
 			</div>
 		</div>
-	 
 
-
-
-		 
-
-
-
-
-</form>
+		  </form>
 </div>
  </div>
 
@@ -316,6 +331,12 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 <script src="~/js/loadash.js"></script>
 
 			  <script>
+
+
+	
+
+
+
 	$(document).ready(function () {
 		var table = $('#example').DataTable({
 		 scrollY: '50vh',
@@ -324,7 +345,7 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 		});
 
 		$('#example tbody').on('click', 'tr', function () {
-		 .
+		 
 			var row_num = parseInt($(this).index());
 
 			if ($(this).hasClass('selected')) {
@@ -466,4 +487,45 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 			})
 		});
 	});
+
+ $(document).ready(function(){
+
+		var getid = $("#doctorm").val();
+
+	    if(getid !="")
+		{
+			$('#example tbody tr:contains(' + getid + '):first').addClass('selected')
+			 
+
+		 
+
+				$("#Sectioap").removeAttr("hidden");
+		 
+
+		}
+	
+		});
+
+
+
+
+	var urls = document.getElementById("geturl").value;
+	if (urls === "") {
+ 
+ 
+	} else {
+
+
+		fetch(urls)
+			.then(response => response.blob())
+			.then(blob => {
+				var url = URL.createObjectURL(blob);
+				window.open(url, "_blank","width=800,height=600");
+			})
+			.catch(error => {
+				console.log("Error fetching PDF:", error);
+			});
+ 
+	}
+ 
 </script>

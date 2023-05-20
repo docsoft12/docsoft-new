@@ -1,0 +1,132 @@
+﻿@using DocsoftBack.Appopintment
+@using DocsoftBack;
+@using DocsoftBack.Addmission;
+@{
+	List<IPDAddmissionModels> Getapponments()
+	{
+		List<IPDAddmissionModels> apponments = new();
+
+		DateTime dt = DateTime.Today;
+		var sql = "";
+		DateTime dt1 = dt.AddDays(1);
+		 sql = "SELECT Bed_Status.Bed_No, Bed_Status.UHID, Petient_Details.Patient_Name,Bed_Status.IPD, IPD.Admit_Time FROM Bed_Status INNER JOIN Petient_Details ON Bed_Status.UHID = Petient_Details.UHID INNER JOIN IPD on Bed_Status.IPD = IPD.IPD_ID where bed_status.status= 'Occupied'";
+
+
+		apponments = MainEngine.GetList<IPDAddmissionModels>(sql).ToList();
+		return apponments;
+
+	}
+ 
+
+
+	 
+
+}
+
+
+<div class="container">
+
+	
+
+	<div class="text-center">
+		<div style="border:groove;height:350px">
+			<div class="row">
+				<div class="col-md-12">
+					<div style="overflow-y:scroll;height:300px">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<td>
+										Bed No
+									</td>
+
+									<td>
+										UHID
+									</td>
+
+									<td>
+										Patient Name
+									</td>
+									<td>
+										IPD ID
+									</td>
+									<td>
+										Admit Date
+									</td>
+									<td>
+										Select
+									</td>
+								</tr>
+							</thead>
+							<tbody>
+
+								@foreach (var item in Getapponments())
+								{
+									<tr>
+										 
+
+
+										<td>@item.Bed_No</td>
+										<td>@item.UHID</td>
+										<td>@item.Patient_Name</td>
+										<td>@item.IPD_ID</td>
+										<td>@item.Admit_Time</td>
+
+
+
+										<td>
+											<button onclick="GetCheack(@item.Bed_No,@item.UHID)" type="button" class="btn btn-primary btn-sm">Select</button>
+										</td>
+
+									</tr>
+
+								}
+
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script>
+
+
+
+	function GetCheack(i, b) {
+
+
+
+		$.ajax(
+			{
+				type: 'POST',
+				dataType: 'JSON',
+				url: '/Admission/GetSelect',
+				data: { apd: i, UHID: b },
+				success:
+					function (response) {
+
+						window.location.href = response.redirectUrl;
+
+					},
+				error:
+					function (response) {
+						alert("Error: " + response);
+					}
+			});
+
+
+	}
+
+
+
+</script>

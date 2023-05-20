@@ -9,9 +9,8 @@
 		DateTime dt = DateTime.Today;
 		var sql = "";
 		DateTime dt1 = dt.AddDays(1);
-		 sql = "SELECT Bed_Status.Bed_No, Bed_Status.UHID, Petient_Details.Patient_Name,Bed_Status.IPD, IPD.Admit_Time FROM Bed_Status INNER JOIN Petient_Details ON Bed_Status.UHID = Petient_Details.UHID INNER JOIN IPD on Bed_Status.IPD = IPD.IPD_ID where bed_status.status= 'Occupied'";
-
-
+		sql = "SELECT Bed_Status.Bed_No, Bed_Status.UHID, Petient_Details.Patient_Name,Bed_Status.IPD, IPD.Admit_Time , IPD.IPD_ID FROM Bed_Status INNER JOIN Petient_Details ON Bed_Status.UHID = Petient_Details.UHID INNER JOIN IPD on Bed_Status.IPD = IPD.IPD_ID where bed_status.status= 'Occupied'";
+		 
 		apponments = MainEngine.GetList<IPDAddmissionModels>(sql).ToList();
 		return apponments;
 
@@ -33,32 +32,32 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div style="overflow-y:scroll;height:300px">
-						<table class="table table-hover">
+						<table id="ted""" class="table table-hover">
 							<thead>
 								<tr>
-									<td>
+									<th>
 										Bed No
-									</td>
+									</th>
 
-									<td>
+									<th>
 										UHID
-									</td>
+									</th>
 
-									<td>
+									<th>
 										Patient Name
-									</td>
-									<td>
+									</th>
+									<th>
 										IPD ID
-									</td>
-									<td>
+									</th>
+									<th>
 										Admit Date
-									</td>
-									<td>
+									</th>
+									<th>
 										Select
-									</td>
+									</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="ted">
 
 								@foreach (var item in Getapponments())
 								{
@@ -75,9 +74,7 @@
 
 
 										<td>
-											<button onclick="GetCheack(@item.Bed_No,@item.UHID)" type="button" class="btn btn-primary btn-sm">Select</button>
-										</td>
-
+											<button class="btn btn-primary btn-sm selectButton">Select</button>
 									</tr>
 
 								}
@@ -100,33 +97,43 @@
 
 <script>
 
+ 
+	
+	$(document).ready(function () {
+		$('#ted').on('click', 'tr', function () {
+			var columns = $(this).find('td');
+			var column2Value = columns.eq(3).text();
+			var column3Value = columns.eq(4).text();
+			var uuid = columns.eq(1).text();
 
 
-	function GetCheack(i, b) {
 
 
+			$.ajax(
+				{
+					type: 'POST',
+					dataType: 'JSON',
+					url: '/Addmission/GetSelect',
+					data: { IPD: column2Value, Admit: column3Value, uhid: uuid },
+					success:
+						function (response) {
 
-		$.ajax(
-			{
-				type: 'POST',
-				dataType: 'JSON',
-				url: '/Admission/GetSelect',
-				data: { apd: i, UHID: b },
-				success:
-					function (response) {
+							window.location.href = response.redirectUrl;
 
-						window.location.href = response.redirectUrl;
+						},
+					error:
+						function (response) {
+							alert("Error: " + response);
+						}
+				});
 
-					},
-				error:
-					function (response) {
-						alert("Error: " + response);
-					}
-			});
+			 
+		});
+	});
 
 
-	}
-
+ 
+ 
 
 
 </script>

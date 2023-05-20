@@ -61,21 +61,31 @@ namespace Docsoftnew.Controllers
 			Console.WriteLine("Done from Check");
 			return View(myModel);
 		}
-		 
+		[HttpPost]
 		public async  Task<JsonResult> AddComplaint(string kk)
 		{
-			var sql_new = "select Item from Comman_Items where Item = '" + kk + "' ";
-			string k = MainEngine.GetFirst<string>(sql_new);
-			if (k!=null || k!="")
+			try
 			{
+				var sql_new = "select Item from Comman_Items where Item = '" + kk + "' ";
+				string k = MainEngine.GetFirst<string>(sql_new);
 
-				var sql = "insert into Comman_Items (Item_Type,Item,Status)values ('Chief_Complaint','" + kk + "','Active')";
-				
-				await MainEngine.ExecuteQuery(sql, kk);
-			Console.WriteLine("Successfully Run!");
-
+				 
+				 
 			}
-		return Json(kk);
+			catch (InvalidOperationException ex)
+			{
+				if (ex.Message.Contains("Sequence contains no elements"))
+				{
+
+					var sql = "insert into Comman_Items (Item_Type,Item,Status)values ('Chief_Complaint','" + kk + "','Active')";
+
+					await MainEngine.ExecuteQuery(sql, kk);
+
+				}
+			}
+				Console.WriteLine("Successfully Run!");
+
+			return Json(kk);
 
 		}
 
@@ -134,17 +144,13 @@ namespace Docsoftnew.Controllers
 			return Json(new { redirectUrl = Url.Action("CheckUp", "Doctor") });
             
 		}
-
-	 
-
-
-
+ 
 
 
 
 		string result;
 		[HttpPost]
-		public JsonResult AddExamin(string find,string apd)
+		public async Task<JsonResult> AddExamin(string find,string apd)
 		{
 	 
 			try
@@ -159,7 +165,7 @@ namespace Docsoftnew.Controllers
 
 				 
 						var sql = "insert into Examination(Ap_ID, Examination, Date_) values ('" + apd + "','" + result + "','" + DateTime.Now.ToString("MM-dd-yyyy HH:mm") + "')";
-						MainEngine.ExecuteQuery<string>(sql);
+						await MainEngine.ExecuteQuery<string>(sql);
 
 
 
@@ -177,7 +183,7 @@ namespace Docsoftnew.Controllers
 					{
 						 
 							var sql = "insert into Examination(Ap_ID, Examination, Date_) values ('" + apd + "','" + find + "','" + DateTime.Now.ToString("MM-dd-yyyy HH:mm") + "')";
-							MainEngine.ExecuteQuery<string>(sql);
+							await MainEngine.ExecuteQuery<string>(sql);
 
 						 
 						 
@@ -282,9 +288,9 @@ namespace Docsoftnew.Controllers
 		{
 			try
 			{
-
-				var sql3 = "select Consultant_ID from Appoint_OPD where Appointment_ID = '"+ apoint + "'";
-
+				 
+					var sql3 = "select Consultant_ID from Appoint_OPD where Appointment_ID = '" + apoint + "'";
+				 
 				string result = MainEngine.GetFirst<string>(sql3);
 
 
@@ -309,10 +315,12 @@ namespace Docsoftnew.Controllers
 				var sql = "insert into Dr_CheckUp(Appointment_ID,UHID,Chief_Complaint,Date_,BP,Pulse,PA,Fever,Spo2,NextFollowUp,Note,CheckupID,Consultant)values ('" + apoint + "','" + uhid + "','" + cheaf + "','" + DateTime.Now.ToString("MM-dd-yyyy HH:mm") + "','" + bp + "','" + pulse + "','" + PA + "','" + Fever + "','" + Spo2 + "','" + Next_date + "','" + Notes + "','" + chk + "','" + name + "')";
 					await MainEngine.ExecuteQuery<string>(sql);
 
-
+				TempData["SuccessMessage"] = "Successfully Submited!";
 			}
 			catch(Exception ex)
 			{
+
+				TempData["ErrorMessage"] = "Something Wrong? please check your details";
 				Console.WriteLine(ex.Message);
 
 			}
@@ -320,7 +328,7 @@ namespace Docsoftnew.Controllers
 			int ks = Convert.ToInt32(apoint);
 			 
 			string url = $"{GetApi.ApiUrl}//Prescription?id={ks}";
-			return Json(new { redirectUrl =  url });
+			return Json(new { redirectUrl =  url});
 
 		}
 
