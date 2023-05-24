@@ -1,0 +1,73 @@
+﻿/* Center the form horizontally */
+#prescriptions_form {
+    margin: 0 auto;
+    max-width: 800px; /* Change this value to adjust the maximum width of the form */
+}
+
+
+
+ 
+/* Set the width of the columns on larger screens */
+@media screen and (min-width: 768px) {
+    .col-md-3 {
+        flex-basis: 25%;
+    }
+
+    .col-md-4 {
+        flex-basis: 33.33%;
+    }
+
+    .col-md-2 {
+        flex-basis: 16.67%;
+    }
+}
+
+/* Set the width of the columns on smaller screens */
+@media screen and (max-width: 767px) {
+    .col-md-3 {
+        flex-basis: 50%;
+    }
+
+    .col-md-4 {
+        flex-basis: 50%;
+    }
+
+    .col-md-2 {
+        flex-basis: 50%;
+    }
+}
+
+/* Remove margin and padding on small screens */
+@media screen and (max-width: 576px) {
+    .row {
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-check {
+        margin-top: 5px;
+    }
+}
+
+/* Make the form controls fill the available width */
+.form-control {
+    width: 100%;
+}
+
+/* Increase the font size of the form controls on smaller screens */
+@media screen and (max-width: 576px) {
+    .form-select,
+    .form-check-label {
+        font-size: 0.9rem;
+    }
+}
+
+/* Add some spacing between form controls */
+.form-check-inline {
+    margin-right: 10px;
+}
+
+/* Adjust the margin of the add button */
+#add_medic {
+    margin-top: 5px;
+}

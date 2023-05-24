@@ -1,0 +1,414 @@
+﻿@using DocsoftBack.Addmission; 
+@using System.Data;
+@using DocsoftBack;
+
+@{
+	List<BedModels> getbeds(string chatg)
+	{
+		List<BedModels> vas = new();
+		try{
+			string da = "SELECT * from Bed_Status where bed_type = '" + chatg + "' ";
+			vas =  MainEngine.GetList<BedModels>(da).ToList();
+
+		}catch(InvalidOperationException ex)
+		{
+
+			vas.Add(new BedModels { Bed_type = "" });
+
+		}
+	return vas;
+		}
+	 
+	List<BedModels> GetList()
+	{
+
+		var sql = "select Bed_type, count(Status) AS Status , Avg(Charges) AS Charges  from Bed_Status group by Bed_type ";
+
+		return MainEngine.GetList<BedModels>(sql).ToList();
+
+	}
+
+
+	List<string> send = new();
+	List<string> SecondBed()
+	{
+		try{
+			foreach (var item in GetList())
+			{
+
+
+				var sql = "select count(Status) As Status from Bed_Status where Bed_Type ='" + item.Bed_type + "'and Status = 'Available' group by Bed_type ";
+				send.Add(MainEngine.GetFirst<string>(sql));
+			}
+		}catch(InvalidOperationException ex)
+		{
+			send.Add("0");
+
+		}
+
+
+	return send;
+	}
+ 
+
+
+
+	IEnumerable<dynamic> GetResult()
+	{
+		return GetList().Zip(SecondBed(), (normal, second) => new { Normal = normal, Second = second });
+
+
+	}
+
+	  
+
+}
+
+ 
+ 
+
+<div class="container">
+	<div class="row mt-2">
+		<div class="col-md-12">
+			<h3 style="color:burlywood" >Bed Master</h3>
+		</div>
+	</div>
+	<div class="row mt-2">
+		<div class="col-md-2">
+			<label class="form-label" >Bed Type</label>
+</div>
+<div class="col-md-4">
+	<select id="bed_type" class="form-select">
+	 
+
+		@foreach(var item in CommanFunctions.Getitemlist("Bed_Type"))
+		{
+					<option value="@item" >@item</option>
+
+
+		}
+			</select>
+	</div>
+	</div>
+
+	<div class="row mt-2">
+        
+ 		<div style="border:groove" class="col-md-7">
+			<div style="overflow-y:scroll;height:300px">
+			<table id="Pre_table" class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Bed Type</th>
+						<th scope="col">Bed No</th>
+						<th scope="col">Status</th>
+						<th scope="col">UHID</th>
+						<th scope="col">Charges</th>
+						<th scope="col">Reserved</th>
+						<th scope="col">IPD</th>
+						 
+					</tr>
+				</thead>
+				<tbody   id="IPDP">
+				 
+				 
+
+				</tbody>
+
+			</table>
+			</div>
+</div>
+
+
+		<div style="border:groove" class="col-md-5">
+			<div style="overflow-y:scroll;height:300px">
+			<table id="Pre_table1"   class="table table-hover">
+				<thead >
+					<tr>
+						<th scope="col">Bed Type</th>
+						<th scope="col">Total Beds</th>
+						<th scope="col">Available</th>
+						<th scope="col">Rate</th>
+				 
+
+
+					</tr>
+				</thead>
+				<tbody  id="IPDP">
+					@foreach (var item in GetResult())
+					{
+						<tr>
+							<td>@item.Normal.Bed_type</td>
+							<td>@item.Normal.Status</td>
+							<td>@item.Second</td>
+							<td>@item.Normal.Charges</td>
+
+
+						</tr>
+					}
+				</tbody>
+
+			</table>
+        </div>
+		</div>
+
+
+	</div>
+
+ 
+ 
+
+
+	<div class="row mt-2">
+
+		<div style="border:groove " class="col-md-12">
+
+		<div>
+
+				<div style="margin:10px" class="row mt-2">
+					<div class="col-md-2">
+						<label class="form-label">Bed Type</label>
+					</div>
+					<div class="col-md-4">
+						<select id="bed_type1" class="form-select">
+							@foreach (var item in CommanFunctions.Getitemlist("Bed_Type"))
+							{
+								<option value="@item">@item</option>
+
+
+							}
+						</select>
+					</div>
+				</div>
+		<div  style="border:groove;margin:10px" class="row mt-2">
+
+				<div class="col-md-12" >
+<div   class="row mt-2">
+
+<div class="col-md-2">
+	<label class="form-label">Charges</label>
+</div>
+<div class="col-md-4">
+	<input type="number" id="charges" class="form-control"/>
+</div>
+
+<div class="col-md-3">
+	<button class="btn btn-warning btn-sm" >Add</button>
+</div>
+
+		</div>
+
+
+						<div class="row mt-2">
+
+							<div class="col-md-12">
+								<h4 style="color:hotpink">Add New Bed</h4>
+							</div>
+
+						</div>
+
+						<div class="row mt-2">
+
+							<div class="col-md-2">
+
+								<label class="form-label">Start Range</label>
+
+							</div>
+
+							<div class="col-md-3">
+								<input type="number" style="text-align:center" id="startbed" class="form-control" />
+							</div>
+
+						</div>
+						<div class="row mt-2">
+
+							<div class="col-md-2">
+
+								<label class="form-label">End Range</label>
+
+							</div>
+
+							<div class="col-md-3">
+								<input type="number" style="text-align:center" id="endbed" class="form-control" />
+							</div>
+
+						</div>
+
+
+						<div class="row mt-2">
+
+							<div class="col-md-2">
+
+								<label style="margin:5px" class="form-label">Total Beds - </label>
+
+							</div>
+
+							<div class="col-md-3">
+								<input readonly="readonly" type="number" id="totalbed" class="form-control" />
+							</div>
+
+						</div>
+
+
+						<div   style="margin:5px" class="row mt-2">
+
+							<div class="col-md-12">
+
+								<button id="addnewbed" class="btn btn-secondary">Add New Bed</button>
+							</div>
+						</div>
+
+
+					</div>
+
+		</div>
+ 
+
+
+	</div>
+	</div>
+		</div>
+
+	 
+ 
+</div>
+
+
+
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+	<script>
+
+
+		$("#addnewbed").click(function(){
+
+			 
+
+			$.ajax({
+				type: 'POST',
+				url: '/Addmission/BedMasterAdd',
+				data: {
+					start: $("#startbed").val(),
+					end: $("#endbed").val(),
+					chatg: $("#bed_type").val(),
+					charges: $("#charges").val()
+				},
+				success: function (result) {
+					if (result.allread == null) {
+						if (result.success !== "") {
+							alert("Successfully added beds!");
+							call();
+						}
+					} else if (result.allread !== "") {
+						alert(result.allread);
+					}
+				},
+				error: function () {
+					console.log('Failed');
+				}
+			});
+     });
+
+
+		function call()
+		{
+		var table = document.getElementById("Pre_table"); // Replace "yourTableId" with the actual ID of your table
+		var rowCount = table.rows.length;
+
+
+		if(rowCount > 0)
+		{
+			for (var i = rowCount - 1; i > 0; i--) {
+				table.deleteRow(i);
+			}
+		}
+		// Start from the last row and remove it until there are no more rows left
+		
+		$.ajax({
+			type: 'POST',
+			url: '/Addmission/GetFill',
+			data: {
+				 
+				chatg: $("#bed_type").val()
+				 
+			},
+			success: function (result) {
+				$.each(result,function(i,item){
+
+					var newrow = '<tr><td> ' + item.Bed_type + ' </td><td>' + item.Bed_No + '</td><td>' + item.Status + '</td><td>' + item.UHID + '</td><td>' + item.Charges + '</td><td>' + item.Reserved + '</td><td>' + item.IPD + '</td><td><button type="button" class="del-row btn-primary btn-sm">Delete</button></td></tr>';
+
+					$('#Pre_table').append(newrow);
+
+
+				});
+				
+
+			},
+			error: function () {
+				console.log('Failed');
+			}
+		});
+		}
+
+
+		 $("#endbed").keyup(function(){
+			 
+			 var s = $("#startbed").val();
+			 var e = $("#endbed").val();
+
+			 var r  = parseInt(e) - parseInt(s);
+
+		if(r < 0)
+		 {
+			$("#totalbed").val('Invalid Bed Range');
+
+		 }else{
+
+			 $("#totalbed").val(r);
+		 }
+
+		 });
+
+
+		 $("#bed_type1").change(function(){
+
+		$.ajax({
+			type: 'POST',
+			url: '/Addmission/GetCharges',
+			data: {
+				 combo: $("#bed_type").val()
+ 
+			},
+			success: function (result) {
+				
+				if(result.Charges!="")
+				{
+					$("#charges").empty();
+					$("#charges").val(result.Charges);
+					$('#charges').attr('readonly', 'readonly');
+				 
+				}else if(result.Visible=="show"){
+
+
+					$('#charges').removeAttr('readonly');
+
+				}
+
+
+
+			},
+			error: function () {
+				console.log('Failed');
+			}
+		});
+
+
+		 });
+
+	</script>
+	 

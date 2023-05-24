@@ -1,0 +1,12 @@
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\bin\Debug\net6.0\DocsoftBack.deps.json
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\bin\Debug\net6.0\DocsoftBack.dll
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\bin\Debug\net6.0\DocsoftBack.pdb
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\DocsoftBack.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\DocsoftBack.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\DocsoftBack.AssemblyInfoInputs.cache
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\DocsoftBack.AssemblyInfo.cs
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\DocsoftBack.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\DocsoftBack.dll
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\refint\DocsoftBack.dll
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\DocsoftBack.pdb
+C:\Users\admin\source\repos\DocSoft\DocsoftBack\obj\Debug\net6.0\ref\DocsoftBack.dll

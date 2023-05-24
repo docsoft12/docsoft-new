@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Docsoftnew</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Docsoftnew.styles.css" asp-append-version="true" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
+ </head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Docsoftnew</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"  id="registrationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                OPD
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="registrationDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Registration">New Registration</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Appointment">Appointment</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"   id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Consultant
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="doctorDropdown">
+                         
+                               
+                                <li><a class="dropdown-item" asp-controller="Doctor" asp-action="CheckUp">Check Up</a></li>
+                                <li><a class="dropdown-item" href="#">Reprint</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"  id="addmissionmenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                IPD
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="addmissionmenu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="Addmission">New Addmission</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="IPDBilling" >Billing</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="BedMaster"  >Bed Master</a></li>
+                                <li><a class="dropdown-item"  >Payment</a></li>
+                                <li><a class="dropdown-item" >IPD Files</a></li>
+                            </ul>
+
+
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div style="margin:5px">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+       
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+     
+
+    <base href="~/" />
+    <script src="_framework/blazor.server.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/webcamjs/webcam.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+</body>
+</html>
