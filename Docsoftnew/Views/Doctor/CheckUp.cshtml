@@ -11,8 +11,76 @@
 
 
 @model DocsoftBack.Doctor.DoctorCheckupModels
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+ 
+	 
+	.btn-primary {
+		color: black;
+		background-color: lightblue	;
+	}
+
+	.btn-secondary {
+		color: black;
+		background-color: lightblue	;
+	}
+
+	.btn-warning {
+		color: black;
+		background-color: lightblue	;
+	}
+
+	.btn-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background-color 0.3s;
+  }
+
+  .btn-icon-check {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4vw;
+    height: 4vw;
+    max-width: 30px;
+    max-height: 30px;
+    background: lightgreen	;
+    border-radius: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+  }
+
+  .btn-icon:hover,
+  .btn-icon:focus {
+    background-color: #e3e3e3;
+	color:black;
+  }
+ 
+
+
+  .btn-icon:hover .btn-icon-check,
+  .btn-icon:focus .btn-icon-check {
+    background-color: #ff0000;
+  }
+
+  @@media (max-width: 768px) {
+    .btn-icon-check {
+      width: 6vw;
+      height: 6vw;
+    }
+  }
+
+  @@media (max-width: 576px) {
+    .btn-icon-check {
+      width: 8vw;
+      height: 8vw;
+    }
+  }
 	input[type="text"] {
 		border: 1px solid #ced4da;
 		border-radius: 4px;
@@ -60,8 +128,8 @@
 
 </style>
 <link href="~/css/prescriptiion.css" rel="stylesheet" />
-
-<div class="container">
+<div style="border:groove">
+<div  class="container">
 
 
 	@if (TempData["ErrorMessage"] != null)
@@ -103,81 +171,63 @@
 
 
 	<div class="row">
-		<div class="col-md-2">
-			<div class="row mt-1" >
+
+		<div class="col-md-3">
+				<div  class="row mt-1">
 				<div class="col">
-					<button id="cheaf_button" onclick="cf" class="btn btn-primary" style="width:200px">
-						Chef Complaint <svg style="  width:auto;height:auto; margin-left:10px; background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+					<button id="cheaf_button" onclick="cf" class="btn btn-primary btn-icon" style="width:200px">
+						Chef Complaint
+						<svg id="cheaficon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
+						</svg>	
+					</button>
+				</div>
+			</div>
+
+			<div class="row mt-1">
+				<div class="col">
+					<button id="viltasbutton" class="btn btn-primary btn-icon" style="width:200px;">
+						Viltas
+						<svg id="viltasicon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
+							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+						</svg>	
+					</button>
+				</div>
+			</div>
+
+			<div class="row mt-1">
+				<div class="col">
+					<button id="prs_button" class="btn btn-primary btn-icon" style="width:200px">
+						Prescriptions
+							<svg id="prsicon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
+							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+						</svg>	
+					</button>
+				</div>
+			</div>
+
+			<div class="row mt-1">
+				<div class="col">
+					<button id="note_button" class="btn btn-primary btn-icon" style="width:200px">
+						Notes
+						<svg id="noteicon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
+							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+						</svg>	
+					</button>
+				</div>
+			</div>
+
+			<div class="row mt-1">
+				<div class="col">
+					<button id="exam_button" class="btn btn-primary btn-icon" style="width:200px">
+						Examination
+						<svg id="examinationicon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
 							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
 						</svg>
 					</button>
 				</div>
-
 			</div>
-
-
-				<div class="row mt-1" >
-				<div class="col">
-					<button id="viltasbutton" class="btn btn-primary" style="width:200px;">
-						Viltas <svg style="  width:auto;height:auto;justify-content: flex-end;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				<div class="row mt-1" >
-				<div class="col">
-
-			<button id="prs_button" class="btn btn-primary" style="width:200px">
-				Prescriptions <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				 <div class="row mt-1" >
-				<div class="col">
-			<button id="note_button" class="btn btn-primary" style="width:200px">
-			Notes <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-				<div class="row mt-1" >
-				<div class="col">
-
-					<button id="exam_button" class="btn btn-primary" style="width:200px">
-				Examination <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-					<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-				</svg>
-			</button>
-			</div>
-			</div>
-
-
-
-
-
-
-
-
-
-			</div>
-
-		<div class="col-md-9">
+		</div>
+		<div style="background-color:white" class="col-md-9">
 
 
 
@@ -620,8 +670,9 @@
 				</div>
 					</div>
 		</div>
-			 
+			 </div>
 	</div>
+	 
 
 
 </div>
@@ -770,6 +821,9 @@ $('#Pre_table').on('click', '.del-row', function() {
 			$('#exam_div').attr('hidden', 'hidden');
 
 
+				
+
+
 
 
 	});
@@ -792,7 +846,22 @@ $('#Pre_table').on('click', '.del-row', function() {
 			$('#prs_div').attr('hidden', 'hidden');
 			$('#note_div').attr('hidden', 'hidden');
 			$('#exam_div').attr('hidden', 'hidden');
+			var cheaf = $("#cheaf_data").val();
+		var table = document.getElementById('Pre_table');
+		var submitButton1 = document.getElementById('cheaf_button');
+		var submitButton2 = document.getElementById('viltasbutton');
+		var submitButton3 = document.getElementById('prs_button');
+		var submitButton4 = document.getElementById('note_button');
+		var submitButton5 = document.getElementById('exam_button');
 
+		var btnIconCheck1 = document.querySelector('#cheaficon');
+		var btnIconCheck2 = document.querySelector('#viltasicon');
+		var btnIconCheck3 = document.querySelector('#prsicon');
+		var btnIconCheck4 = document.querySelector('#noteicon');
+		var btnIconCheck5 = document.querySelector('#examinationicon');
+				
+			submitButton2.classList.add('btn-icon');
+			btnIconCheck2.style.display = 'block';
 
 
 
@@ -820,6 +889,7 @@ $('#Pre_table').on('click', '.del-row', function() {
 			$('#prs_div').attr('hidden', 'hidden');
 			$('#note_div').attr('hidden', 'hidden');
 			$('#exam_div').attr('hidden', 'hidden');
+
 		});
 	});
 	 
@@ -873,7 +943,22 @@ $('#Pre_table').on('click', '.del-row', function() {
 			$('#cheaf_div').attr('hidden', 'hidden');
 			$('#prs_div').attr('hidden', 'hidden');
 			$('#exam_div').attr('hidden', 'hidden');
+			var cheaf = $("#cheaf_data").val();
+		var table = document.getElementById('Pre_table');
+		var submitButton1 = document.getElementById('cheaf_button');
+		var submitButton2 = document.getElementById('viltasbutton');
+		var submitButton3 = document.getElementById('prs_button');
+		var submitButton4 = document.getElementById('note_button');
+		var submitButton5 = document.getElementById('exam_button');
 
+		var btnIconCheck1 = document.querySelector('#cheaficon');
+		var btnIconCheck2 = document.querySelector('#viltasicon');
+		var btnIconCheck3 = document.querySelector('#prsicon');
+		var btnIconCheck4 = document.querySelector('#noteicon');
+		var btnIconCheck5 = document.querySelector('#examinationicon');
+
+			submitButton4.classList.add('btn-icon');
+			btnIconCheck4.style.display = 'block';
 
 
 
@@ -913,9 +998,23 @@ $('#Pre_table').on('click', '.del-row', function() {
 			$('#cheaf_div').attr('hidden', 'hidden');
 			$('#prs_div').attr('hidden', 'hidden');
 			$('#note_div').attr('hidden', 'hidden');
+			var cheaf = $("#cheaf_data").val();
+			var table = document.getElementById('Pre_table');
+			var submitButton1 = document.getElementById('cheaf_button');
+			var submitButton2 = document.getElementById('viltasbutton');
+			var submitButton3 = document.getElementById('prs_button');
+			var submitButton4 = document.getElementById('note_button');
+			var submitButton5 = document.getElementById('exam_button');
+
+			var btnIconCheck1 = document.querySelector('#cheaficon');
+			var btnIconCheck2 = document.querySelector('#viltasicon');
+			var btnIconCheck3 = document.querySelector('#prsicon');
+			var btnIconCheck4 = document.querySelector('#noteicon');
+			var btnIconCheck5 = document.querySelector('#examinationicon');
 
 
-
+			submitButton5.classList.add('btn-icon');
+			btnIconCheck5.style.display = 'block';
 
 		});
 	});
@@ -964,7 +1063,11 @@ $('#Pre_table').on('click', '.del-row', function() {
 
 		var kk = $('#txtadd').val();
 
+		var d = $("#cheaf_data").val(); 
+		
+
 		//txtadd
+
 
 
 		$.ajax(
@@ -975,15 +1078,22 @@ $('#Pre_table').on('click', '.del-row', function() {
 				data: { kk:kk },
 				success:
 					function (response) {
-
+						 if(d!="")
+		{
+						$("#cheaf_data").append(" ," + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
+         
+		}else{
 						$("#cheaf_data").append(" " + $('#txtadd').val() + " " + $('#from_t').val() + " " + $('#from_date').val() + "  ");
+
+		}
 
 				$("#list1").append("<li><button style='margin:5px'  class='btn btn-secondary btn-sm' value="+$('#txtadd').val() +">" +$('#txtadd').val() + "</button></li>");
 
 
-					 
-
-						console.log(response);
+							
+ 
+						$("#from_t").val("");
+							 
 					},
 				error:
 					function (response) {
@@ -992,7 +1102,8 @@ $('#Pre_table').on('click', '.del-row', function() {
 			});
 
 
-
+			
+			 
 		 
 	});
 
@@ -1309,8 +1420,7 @@ $('#Pre_table').on('click', '.del-row', function() {
  	           var com = ""+store+"/";
   
 			var d = document.getElementById("bp").value  = com;
-		 
-
+		  
 			   }
 			   
 		 
@@ -1410,5 +1520,208 @@ else{
 
   
  
+
+
+
+
+
+	$(document).ready(function () {
+
+		 
+		var cheaf = $("#cheaf_data").val();
+		var table = document.getElementById('Pre_table');
+    var submitButton1 = document.getElementById('cheaf_button');
+    var submitButton2 = document.getElementById('viltasbutton');
+    var submitButton3 = document.getElementById('prs_button');
+    var submitButton4 = document.getElementById('note_button');
+		var submitButton5 = document.getElementById('exam_button');
+
+    var btnIconCheck1 = document.querySelector('#cheaficon');
+    var btnIconCheck2 = document.querySelector('#viltasicon');
+    var btnIconCheck3 = document.querySelector('#prsicon');
+    var btnIconCheck4 = document.querySelector('#noteicon');
+    var btnIconCheck5 = document.querySelector('#examinationicon');
+
+      
+	if(cheaf!="")
+	{ 
+
+		submitButton1.classList.add('btn-icon');
+			btnIconCheck1.style.display = 'block';
+
+	}else{
+
+	
+      submitButton1.classList.remove('btn-icon');
+      btnIconCheck1.style.display = 'none';
+     
+	}
+
+
+		var dim = $('#viltas_div').is(":visible");
+		if (dim == true) {
+			submitButton2.classList.add('btn-icon');
+			btnIconCheck2.style.display = 'block';
+		}
+		else {
+			submitButton2.classList.remove('btn-icon');
+			btnIconCheck2.style.display = 'none';
+		}
+
+
+
+		var dim1 = $('#note_div').is(":visible");
+            if (dim1 == true) {
+               	 submitButton4.classList.add('btn-icon');
+      btnIconCheck4.style.display = 'block';
+            }
+			else{
+ submitButton4.classList.remove('btn-icon');
+      btnIconCheck4.style.display = 'none';
+
+			}
+
+
+			var dim2 = $('#exam_div').is(":visible");
+		if (dim2 == true) {
+			submitButton5.classList.add('btn-icon');
+			btnIconCheck5.style.display = 'block';
+		} 
+		else {
+			submitButton5.classList.remove('btn-icon');
+			btnIconCheck5.style.display = 'none';
+
+		}
+
+		var rowsc = $("#Pre_table tr").length;
+
+		if (rowsc > 1) {
+			submitButton3.classList.add('btn-icon');
+			btnIconCheck3.style.display = 'block';
+
+		} else {
+			submitButton3.classList.remove('btn-icon');
+			btnIconCheck3.style.display = 'none';
+		}
+
+	});
+
+
+	$('button').click(function(){
+
+		var cheaf = $("#cheaf_data").val();
+		var table = document.getElementById('Pre_table');
+		var submitButton1 = document.getElementById('cheaf_button');
+		var submitButton2 = document.getElementById('viltasbutton');
+		var submitButton3 = document.getElementById('prs_button');
+		var submitButton4 = document.getElementById('note_button');
+		var submitButton5 = document.getElementById('exam_button');
+
+		var btnIconCheck1 = document.querySelector('#cheaficon');
+		var btnIconCheck2 = document.querySelector('#viltasicon');
+		var btnIconCheck3 = document.querySelector('#prsicon');
+		var btnIconCheck4 = document.querySelector('#noteicon');
+		var btnIconCheck5 = document.querySelector('#examinationicon');
+
+
+		if (cheaf != "") {
+
+			submitButton1.classList.add('btn-icon');
+			btnIconCheck1.style.display = 'block';
+
+		} else {
+
+
+			submitButton1.classList.remove('btn-icon');
+			btnIconCheck1.style.display = 'none';
+
+		}
+
+
+
+		 
+
+
+			var rowsc = $("#Pre_table tr").length;
+ 
+			if (rowsc > 1) {
+				submitButton3.classList.add('btn-icon');
+				btnIconCheck3.style.display = 'block';
+
+			} else {
+				submitButton3.classList.remove('btn-icon');
+				btnIconCheck3.style.display = 'none';
+			}
+
+
+	});
+
+
+
+	 
+		 
+			
+		 
+	$("#gotopresc").click(function(){
+			var cheaf = $("#cheaf_data").val();
+		var table = document.getElementById('Pre_table');
+		var submitButton1 = document.getElementById('cheaf_button');
+		var submitButton2 = document.getElementById('viltasbutton');
+		var submitButton3 = document.getElementById('prs_button');
+		var submitButton4 = document.getElementById('note_button');
+		var submitButton5 = document.getElementById('exam_button');
+
+		var btnIconCheck1 = document.querySelector('#cheaficon');
+		var btnIconCheck2 = document.querySelector('#viltasicon');
+		var btnIconCheck3 = document.querySelector('#prsicon');
+		var btnIconCheck4 = document.querySelector('#noteicon');
+		var btnIconCheck5 = document.querySelector('#examinationicon');
+		submitButton2.classList.add('btn-icon');
+			btnIconCheck2.style.display = 'block';
+
+	});
+ 
+
+		
+		 
+	 
+	$("#gotoexamin").click(function(){
+				var submitButton1 = document.getElementById('cheaf_button');
+		var submitButton2 = document.getElementById('viltasbutton');
+		var submitButton3 = document.getElementById('prs_button');
+		var submitButton4 = document.getElementById('note_button');
+		var submitButton5 = document.getElementById('exam_button');
+
+		var btnIconCheck1 = document.querySelector('#cheaficon');
+		var btnIconCheck2 = document.querySelector('#viltasicon');
+		var btnIconCheck3 = document.querySelector('#prsicon');
+		var btnIconCheck4 = document.querySelector('#noteicon');
+		var btnIconCheck5 = document.querySelector('#examinationicon');
+
+		 submitButton4.classList.add('btn-icon');
+			btnIconCheck4.style.display = 'block';
+	});
+
+
+
+
+	document.addEventListener('keydown', function (event) {
+		if (event.keyCode === 13) {
+			var form = event.target.form;
+			var index = Array.prototype.indexOf.call(form, event.target);
+			var nextIndex = index + 1;
+
+			// Skip over hidden or disabled elements
+			while (form.elements[nextIndex] && (form.elements[nextIndex].hidden || form.elements[nextIndex].disabled)) {
+				nextIndex++;
+			}
+
+			if (nextIndex < form.elements.length) {
+				form.elements[nextIndex].focus();
+				event.preventDefault();
+			}
+		}
+	});
+
 
 </script>

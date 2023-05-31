@@ -257,6 +257,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\stethoscope.png",
+      "PackagePath": "staticwebassets\\stethoscope.png"
+    },
+    {
       "Id": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\wwwroot\\webcamjs\\webcam.js",
       "PackagePath": "staticwebassets\\webcamjs\\webcam.js"
     },

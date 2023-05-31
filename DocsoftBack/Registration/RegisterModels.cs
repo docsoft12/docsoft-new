@@ -10,12 +10,11 @@ namespace DocsoftBack.Registration
 	public class RegisterModels : IRegisterModels
 	{
 		public int? ID { get; set; }
-		public string? UHID { get; set; }
-		[Required(ErrorMessage = "Please enter Mobile Number")]
-		[StringLength(10)]
-		public string? Mobile_No { get; set; }
+		public string UHID { get; set; }
+		
+		public string Mobile_No { get; set; }
 		[Required(ErrorMessage = "Please enter Aadhar No")]
-		[StringLength(16)]
+		[StringLength(16)] 
 		public string? Aadhar_No { get; set; }
 		[Required(ErrorMessage = "Please enter Patient Name")]
 

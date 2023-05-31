@@ -16,7 +16,7 @@ namespace DocsoftBack.Appopintment
 		[Required(ErrorMessage = "Please select Apointmnet Time")]
 		public string Ap_Time { get; set; }
 
-		public string Url { get; set; } = "Suc";
+		public string Url { get; set; }
         public string Time_Slot { get; set; }
 
         public string Status { get; set; }

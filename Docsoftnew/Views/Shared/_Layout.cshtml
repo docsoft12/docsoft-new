@@ -9,61 +9,97 @@
     <link rel="stylesheet" href="~/Docsoftnew.styles.css" asp-append-version="true" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
- </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-beta1/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<style>
+    .ipd-dropdown {
+        background-color: #333;
+        color: #fff;
+    }
+
+        .ipd-dropdown .dropdown-item {
+            color: #fff;
+        }
+
+        .dropdown-menu {
+        background-color: #333;
+        color: #fff;
+        }
+        .dropdown-item{
+        color: #fff;
+        }
+            .ipd-dropdown .dropdown-item:hover {
+        background-color: #fff;
+        color: black;
+            }
+
+            #red{
+                background-color:lightblue;
+            }
+</style>
+ 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Docsoftnew</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"  id="registrationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                OPD
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="registrationDropdown">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Registration">New Registration</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Appointment">Appointment</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"   id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Consultant
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="doctorDropdown">
-                         
-                               
-                                <li><a class="dropdown-item" asp-controller="Doctor" asp-action="CheckUp">Check Up</a></li>
-                                <li><a class="dropdown-item" href="#">Reprint</a></li>
-                            </ul>
-                        </li>
+        <nav id="red" class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="~/stethoscope.png" width="40" height="40" alt="Logo">
+                Docsoft
+            </a>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"  id="addmissionmenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                IPD
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="addmissionmenu">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="Addmission">New Addmission</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="IPDBilling" >Billing</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="BedMaster"  >Bed Master</a></li>
-                                <li><a class="dropdown-item"  >Payment</a></li>
-                                <li><a class="dropdown-item" >IPD Files</a></li>
-                            </ul>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="opdDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-hospital-o"></i> OPD
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="opdDropdown">
+                            <!-- Dropdown menu items -->
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Registration">New Registration</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Appointment">Appointment</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="consultantDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-stethoscope"></i> Consultant
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="consultantDropdown">
+                            <!-- Dropdown menu items -->
+                            <a class="dropdown-item" asp-controller="Doctor" asp-action="CheckUp">Check Up</a>
+                            <a class="dropdown-item" href="#">Reprint</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ipdDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bed"></i> IPD
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right ipd-dropdown" aria-labelledby="ipdDropdown">
+                            <!-- Dropdown menu items -->
+                                  <a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="Addmission">New Addmission</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="IPDBilling" >Billing</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Addmission" asp-action="BedMaster"  >Bed Master</a>
+                               <a class="dropdown-item"  >Payment</a>
+                               <a class="dropdown-item" >IPD Files</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>
+
+
 
     </header>
     <div style="margin:5px">
@@ -86,7 +122,45 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/webcamjs/webcam.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+ 
 
+    <script>
+        // Enable dropdown on hover
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $(this).addClass('show');
+                    $(this).find('.dropdown-menu').addClass('show');
+                },
+                function () {
+                    $(this).removeClass('show');
+                    $(this).find('.dropdown-menu').removeClass('show');
+                }
+            );
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                var form = event.target.form;
+                var index = Array.prototype.indexOf.call(form, event.target);
+                var nextIndex = index + 1;
+
+                // Skip over hidden or disabled elements
+                while (form.elements[nextIndex] && (form.elements[nextIndex].hidden || form.elements[nextIndex].disabled)) {
+                    nextIndex++;
+                }
+
+                if (nextIndex < form.elements.length) {
+                    form.elements[nextIndex].focus();
+                    event.preventDefault();
+                }
+            }
+        });
+
+
+
+
+    </script>
 
 
 </body>

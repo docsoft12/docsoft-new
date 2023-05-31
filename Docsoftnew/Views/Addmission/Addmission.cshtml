@@ -31,6 +31,72 @@
 
 <style>
 
+	.btn-primary {
+		color: black;
+		background-color: lightblue;
+	}
+
+	.btn-secondary {
+		color: black;
+		background-color: lightblue;
+	}
+
+	.btn-warning {
+		color: black;
+		background-color: lightblue;
+	}
+
+	.btn-icon {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		transition: background-color 0.3s;
+	}
+
+	.btn-icon-check {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 4vw;
+		height: 4vw;
+		max-width: 30px;
+		max-height: 30px;
+		background: lightgreen;
+		border-radius: 65%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.3s;
+	}
+
+	.btn-icon:hover,
+	.btn-icon:focus {
+		background-color: #e3e3e3;
+		color: black;
+	}
+
+
+
+		.btn-icon:hover .btn-icon-check,
+		.btn-icon:focus .btn-icon-check {
+			background-color: #ff0000;
+		}
+
+	@@media (max-width: 768px) {
+		.btn-icon-check {
+			width: 6vw;
+			height: 6vw;
+		}
+	}
+
+	@@media (max-width: 576px) {
+		.btn-icon-check {
+			width: 8vw;
+			height: 8vw;
+		}
+	}
 	.event_list {
 		display: flex;
 		flex-wrap: wrap;
@@ -72,23 +138,9 @@
 		<div class="col-md-3">
 			<div class="row mt-1">
 				<div class="col">
-					<button id="ipdbutton" class="btn btn-primary" style="width:200px">
-						IPD Patient <svg style="  width:auto;height:auto; margin-left:10px; background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-						</svg>
-					</button>
-				</div>
-
-			</div>
-
-
-			<div class="row mt-1">
-				<div class="col">
-					<button id="bedbutton" class="btn btn-primary" style="width:200px;">
-					Patient Bed <svg style="  width:auto;height:auto;justify-content: flex-end;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+					<button id="ipdbutton" class="btn btn-primary btn-icon" style="width:200px">
+						<span class="bi bi-people-fill"></span> IPD Patient
+					<svg id="ipdi" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
 							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
 						</svg>
 					</button>
@@ -97,20 +149,25 @@
 
 			<div class="row mt-1">
 				<div class="col">
-
-					<button id="combutton" class="btn btn-primary" style="width:200px">
-						Complaint and Other <svg style="  width:auto;height:auto;
-  background: red;
-  border-radius: 50%" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+					<button id="bedbutton" class="btn btn-primary btn-icon" style="width:200px;">
+						<span class="bi bi-bed"></span> Patient Bed
+						<svg id="bedi" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
 							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
 						</svg>
 					</button>
 				</div>
 			</div>
- 
 
-		  
-
+			<div class="row mt-1">
+				<div class="col">
+					<button id="combutton" class="btn btn-primary btn-icon" style="width:200px">
+						<span class="bi bi-chat-left-text-fill"></span> Complaint and Other
+						<svg id="comi" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="btn-icon-check" viewBox="0 0 16 16">
+							<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+						</svg>
+					</button>
+				</div>
+			</div>
 		</div>
 
 
@@ -838,10 +895,120 @@
 
 
 
+	$('button').click(function () {
 
-
-
+ 
+		var table = document.getElementById('Pre_table');
+		var submitButton1 = document.getElementById('ipdbutton');
+		var submitButton2 = document.getElementById('bedbutton');
+		var submitButton3 = document.getElementById('combutton');
+		 
+		var btnIconCheck1 = document.querySelector('#ipdi');
+		var btnIconCheck2 = document.querySelector('#bedi');
+		var btnIconCheck3 = document.querySelector('#comi');
 	 
+
+		var getuhd = $("#getuhd").val();
+		var bednumber = $("#bednumber").val();
+		var cheaf_data = $("#cheaf_data").val();
+		 
+		 
+		if (cheaf_data != "") {
+
+			submitButton3.classList.add('btn-icon');
+			btnIconCheck3.style.display = 'block';
+
+		} else {
+
+
+			submitButton3.classList.remove('btn-icon');
+			btnIconCheck3.style.display = 'none';
+
+		}
+
+		 if(getuhd!="")
+		 {
+			 
+			submitButton1.classList.add('btn-icon');
+			btnIconCheck1.style.display = 'block';
+
+
+		 }else{
+			 
+			submitButton1.classList.remove('btn-icon');
+			btnIconCheck1.style.display = 'none';
+
+		 }
+		 if(bednumber!="")
+		 {
+			 
+			submitButton2.classList.add('btn-icon');
+			btnIconCheck2.style.display = 'block';
+
+		 }else{
+			 submitButton2.classList.remove('btn-icon');
+			btnIconCheck2.style.display = 'none';
+		 }
+
+	});
+
+
+
+
+
+	 $(document).ready(function(){
+
+		 
+		var table = document.getElementById('Pre_table');
+		var submitButton1 = document.getElementById('ipdbutton');
+		var submitButton2 = document.getElementById('bedbutton');
+		var submitButton3 = document.getElementById('combutton');
+
+		var btnIconCheck1 = document.querySelector('#ipdi');
+		var btnIconCheck2 = document.querySelector('#bedi');
+		var btnIconCheck3 = document.querySelector('#comi');
+
+
+		var getuhd = $("#getuhd").val();
+		var bednumber = $("#bednumber").val();
+		var cheaf_data = $("#cheaf_data").val();
+
+	if (cheaf_data != "") {
+
+			submitButton3.classList.add('btn-icon');
+			btnIconCheck3.style.display = 'block';
+
+		} else {
+
+
+			submitButton3.classList.remove('btn-icon');
+			btnIconCheck3.style.display = 'none';
+
+		}
+
+		if (getuhd != "") {
+
+			submitButton1.classList.add('btn-icon');
+			btnIconCheck1.style.display = 'block';
+
+
+		} else {
+
+			submitButton1.classList.remove('btn-icon');
+			btnIconCheck1.style.display = 'none';
+
+		}
+		if (bednumber != "") {
+
+			submitButton2.classList.add('btn-icon');
+			btnIconCheck2.style.display = 'block';
+
+		} else {
+			submitButton2.classList.remove('btn-icon');
+			btnIconCheck2.style.display = 'none';
+		}
+
+	 });
 
 
 

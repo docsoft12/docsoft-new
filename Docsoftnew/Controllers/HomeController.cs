@@ -20,6 +20,7 @@ using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using System.Web.Http.Results;
 using Newtonsoft.Json;
+using System.Data.SqlClient;
 
 namespace Docsoftnew.Controllers
 {
@@ -210,8 +211,43 @@ namespace Docsoftnew.Controllers
 
 
 
+		public class test
+		{
+			public string? UHID { get; set; }
+			public string? Mobile_No { get; set; }
+			public string? Aadhar_No { get; set; }
+			public string? Patient_Name { get; set; }
+		}
 
-		 
+
+		[HttpPost]
+		public JsonResult GetSearch(string search)
+		{
+			List<test> getlist = new();
+
+			try
+			{
+				SqlDataAdapter da = new SqlDataAdapter("Select UHID,Mobile_No,Aadhar_No,Patient_Name from Petient_Details where  UHID Like '%" + search + "%' or Mobile_No Like '%" + search + "%' or Aadhar_No Like '%" + search + "%' or Patient_Name Like '%" + search + "%' ", MainEngine.GetConnection);
+				DataTable ds = new DataTable();
+				da.Fill(ds);
+				for (int i = 0; i < ds.Rows.Count; i++)
+				{
+					getlist.Add(new test { UHID =  ds.Rows[i][0].ToString(), Patient_Name =  ds.Rows[i][3].ToString(), Mobile_No = ds.Rows[i][1].ToString(), Aadhar_No =  ds.Rows[i][2].ToString() });
+				}
+				return Json(getlist);
+
+			}
+			catch (InvalidOperationException ex)
+			{
+				// Handle the exception appropriately
+				// For example, log the exception or return an error response
+				Console.WriteLine("An exception occurred: " + ex.Message);
+				return Json("An error occurred while processing the request.");
+			}
+		}
+
+
+
 
 		public IActionResult Index()
 		{
@@ -259,7 +295,7 @@ namespace Docsoftnew.Controllers
 			{
 
 
-				var sql = "select UHID , Patient_Name from Petient_Details where Mobile_No = '" + number+"'";
+				var sql = "select UHID,Patient_Name from Petient_Details where Mobile_No = '" + number+"'";
 
 				models = MainEngine.GetList<RegisterModels>(sql).ToList();
 
@@ -289,7 +325,9 @@ namespace Docsoftnew.Controllers
 		public JsonResult GetApooint(string UHID)
 		{
 			ApponmentModels models = new();
-			models.Patient_Name = UHID;
+			models.UHID = UHID;
+
+			Console.WriteLine(UHID);
 
 			TempData["ApponmentModels"] = JsonConvert.SerializeObject(models);
 			return Json(new { redirectUrl = Url.Action("Appointment", "Home") });

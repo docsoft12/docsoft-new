@@ -245,7 +245,7 @@ namespace Docsoftnew.Controllers
 			List<IPD_SET> getlist = new();
 			try
 			{
-				var sql = "Select Bill_Amount,Discount_Per,Discount_Amount,Amount_After_Dis from IPD where IPD_ID = '" + IPD+"'";
+				var sql = "Select Bill_Amount,Discount_Per,Discount_Amount,Amount_After_Dis from IPD where IPD_ID = '" + IPD+"'`";
 				getlist = MainEngine.GetList<IPD_SET>(sql).ToList();
 
 			}
@@ -462,7 +462,7 @@ namespace Docsoftnew.Controllers
 		}
 
 
-
+		[HttpPost]
 		public JsonResult GetData(string IPD , string Admit , string GetDate)
 		{ 
 			
@@ -485,7 +485,7 @@ namespace Docsoftnew.Controllers
 
 			days.Charges = MainEngine.GetFirst<string>(sql);
 			days.Bed_Type = MainEngine.GetFirst<string>(sql1);
-			return Json(days);
+			return Json(new { Bed_Type  = days.Bed_Type,Charges = days.Charges, RoundDays  = days.GetDays , GetDays= days.GetDays});
 
 		}
 

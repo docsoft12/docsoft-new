@@ -64,10 +64,21 @@
 
 }
 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style>
+body{
+	background-color:lightgreen;
+}
+
+</style>
+
  
  
 
-<div class="container">
+<div style="background-color:white" class="container">
 	<div class="row mt-2">
 		<div class="col-md-12">
 			<h3 style="color:burlywood" >Bed Master</h3>
@@ -381,25 +392,25 @@
 			type: 'POST',
 			url: '/Addmission/GetCharges',
 			data: {
-				 combo: $("#bed_type").val()
+				 combo: $("#bed_type1").val()
  
 			},
 			success: function (result) {
-				
+				$("#charges").empty();
+
 				if(result.Charges!="")
 				{
-					$("#charges").empty();
 					$("#charges").val(result.Charges);
 					$('#charges').attr('readonly', 'readonly');
 				 
 				}else if(result.Visible=="show"){
 
 
-					$('#charges').removeAttr('readonly');
+					$('#charges').removeAttr("readonly");
 
 				}
 
-
+				$('#charges').removeAttr("readonly");
 
 			},
 			error: function () {
