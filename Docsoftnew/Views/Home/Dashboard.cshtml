@@ -1,0 +1,221 @@
+﻿ @using DocsoftBack.Addmission
+@{
+    string topd;
+    string tregistration;
+    string tmopd;
+    string lmopd;
+    string tmipd;
+    string cipd;
+    string toopd;
+    string tooipd;
+
+    DateTime date = DateTime.Now; // Replace with the date you want to get the month for
+    DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+    DateTime lastDayOfMonth = new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
+    DateTime lastMonth = date.AddMonths(-1);
+    topd = CommanFunctions.CellValue("Select Count(Appointment_ID) from Appoint_OPD where Date_='" + DateTime.Today.Date.ToString("MM-dd-yyyy") + "' ");
+
+    tregistration = CommanFunctions.CellValue("Select Count(UHID) from Petient_Details where Reg_Date='" + DateTime.Today.Date.ToString("MM-dd-yyyy") + "' ");
+
+    tmopd = CommanFunctions.CellValue("Select Count(Appointment_ID) from Appoint_OPD where Date_ between '" + firstDayOfMonth + "' and  '" + lastDayOfMonth + "'");
+
+    DateTime firstDayOflastmonth = new DateTime(lastMonth.Year, lastMonth.Month, 1);
+    DateTime lastDayOflastmonth = new DateTime(lastMonth.Year, lastMonth.Month, DateTime.DaysInMonth(lastMonth.Year, lastMonth.Month));
+
+    lmopd = CommanFunctions.CellValue("Select Count(IPD_ID) from IPD where Admit_Time between '" + firstDayOflastmonth + "' and  '" + lastDayOflastmonth + "'");
+
+    tmipd = CommanFunctions.CellValue("Select Count(IPD_ID) from IPD where Admit_Time between '" + firstDayOfMonth + "' and  '" + lastDayOfMonth + "'");
+
+    cipd = CommanFunctions.CellValue("Select Count(IPD_ID) from IPD where Status = 'Admitted'");
+
+
+}
+<style>
+    .card-title{
+        font-size:13px;
+    }
+    .card{
+        background-color:lightblue;
+    }
+    .amirrow{
+        display:flex;
+        grid-template-columns:repeat(8,3frm)
+    }
+</style>
+ 
+ <div  >
+      <div class="container-fluid" >
+
+
+        <div   class="row amirrow">
+            <div  class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div style="height:100px;" class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Today's OPD</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                <p id="topd" class="text-center">@topd</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                    <div style="height:100px" class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Today's Registration</h5>
+                                </div>
+                        <div class="card-body text-center">
+                                <p id="tregistration" class="text-center">@tregistration</p>
+
+                        </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                    <div style="height:100px" class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">This Month's OPD</h5>
+                                </div>
+                        <div class="card-body text-center">
+                                <p id="tmopd" class="text-center">@tmopd</p>
+
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div  class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                    <div style="height:100px" class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Last Month's OPD</h5>
+                                </div>
+                        <div class="card-body text-center">
+                                <p id="lmopd" class="text-center">@lmopd</p>
+
+                        </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div style="height:100px" class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">This Month's IPD</h5>
+                                </div>
+                        <div class="card-body text-center">
+                                <p id="tmipd" class="text-center">@tmipd</p>
+
+                        </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                    <div style="height:100px;" class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Current IPD</h5>
+                                </div>
+                        <div class="card-body text-center">
+                                <p id="cipd" class="text-center">@cipd</p>
+
+                        </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                  
+                </div>
+            <div  class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4 mb-5">
+                    <div style="height:100px" class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Total OPD</h5>
+                                </div>
+                        <div class="card-body text-center">
+                            <p id="toopd" class="text-center">0</p>
+
+                        </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-5">
+                    <div style="height:100px"class="card ">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Total IPD</h5>
+                                </div>
+                        <div class="card-body text-center">
+                                <p id="tooipd" class="text-center">0</p>
+
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+</div>
+            </div>
+     
+ </div>
+ </div>
+
+
+
+<div class="row">
+  <div class="col-md-6">
+        <canvas id="chart"></canvas>
+  </div>
+  <div class="col-md-6">
+        <canvas id="chart1"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var chartData = @Html.Raw(ViewBag.ChartData);
+    var chartData1 = @Html.Raw(ViewBag.ChartData1);
+
+
+    var ctx = document.getElementById('chart').getContext('2d');
+    var ctx1 = document.getElementById('chart1').getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.map(dataPoint => dataPoint.DayOfMonth),
+            datasets: [{
+                label: 'OPD',
+                data: chartData.map(dataPoint => dataPoint.RecordCount),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+          
+
+        }
+    });
+
+
+
+    var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: chartData1.map(dataPoint => dataPoint.DayOfMonth),
+            datasets: [{
+                label: 'IPD',
+                data: chartData.map(dataPoint => dataPoint.RecordCount),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+
+
+        }
+    });
+
+</script>
+ 
+
+
+
+

@@ -113,6 +113,10 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "Chart.js": {
+              "target": "Package",
+              "version": "[3.7.1, )"
+            },
             "CrystalReports.Engine": {
               "target": "Package",
               "version": "[13.0.4003, )"

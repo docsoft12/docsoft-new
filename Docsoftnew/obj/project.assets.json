@@ -41,6 +41,9 @@
           }
         }
       },
+      "Chart.js/3.7.1": {
+        "type": "package"
+      },
       "CrystalReports.AxShockwaveFlashObjects/13.0.4003": {
         "type": "package",
         "dependencies": {
@@ -3056,6 +3059,19 @@
         "aspnetcore.reportingservices.nuspec",
         "lib/netstandard2.0/AspNetCore.ReportingServices.dll",
         "lib/netstandard2.0/AspNetCore.ReportingServices.pdb"
+      ]
+    },
+    "Chart.js/3.7.1": {
+      "sha512": "gJunTMEueTNdA5Hp92J9sv363msSemW+GSy1VtbrwjxCaMrp+/mgB20EdVezbP34dbM+h+A8G5XbEuL6tOJoCw==",
+      "type": "package",
+      "path": "chart.js/3.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "chart.js.3.7.1.nupkg.sha512",
+        "chart.js.nuspec",
+        "content/Scripts/chart.js",
+        "content/Scripts/chart.min.js"
       ]
     },
     "CrystalReports.AxShockwaveFlashObjects/13.0.4003": {
@@ -8681,6 +8697,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "AspNetCore.Reporting >= 2.1.0",
+      "Chart.js >= 3.7.1",
       "CrystalReports.Engine >= 13.0.4003",
       "CrystalReports.ReportSource >= 13.0.4003",
       "CrystalReports.Shared >= 13.0.4003",
@@ -8744,6 +8761,10 @@
           "AspNetCore.Reporting": {
             "target": "Package",
             "version": "[2.1.0, )"
+          },
+          "Chart.js": {
+            "target": "Package",
+            "version": "[3.7.1, )"
           },
           "CrystalReports.Engine": {
             "target": "Package",

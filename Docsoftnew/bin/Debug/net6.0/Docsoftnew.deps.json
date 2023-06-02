@@ -9,6 +9,7 @@
       "Docsoftnew/1.0.0": {
         "dependencies": {
           "AspNetCore.Reporting": "2.1.0",
+          "Chart.js": "3.7.1",
           "CrystalReports.Engine": "13.0.4003",
           "CrystalReports.ReportSource": "13.0.4003",
           "CrystalReports.Shared": "13.0.4003",
@@ -58,6 +59,7 @@
           }
         }
       },
+      "Chart.js/3.7.1": {},
       "CrystalReports.AxShockwaveFlashObjects/13.0.4003": {
         "dependencies": {
           "CrystalReports.ShockwaveFlashObjects": "13.0.4003"
@@ -1949,6 +1951,13 @@
       "sha512": "sha512-tnqFe8Vxr4sJCEyO4XbUDqnDM+QOE8lDqpcmKM4ayhoNv1973XwztizPyQQMT9/gey26+AoT56BTdAyWC3CuMQ==",
       "path": "aspnetcore.reportingservices/2.1.0",
       "hashPath": "aspnetcore.reportingservices.2.1.0.nupkg.sha512"
+    },
+    "Chart.js/3.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gJunTMEueTNdA5Hp92J9sv363msSemW+GSy1VtbrwjxCaMrp+/mgB20EdVezbP34dbM+h+A8G5XbEuL6tOJoCw==",
+      "path": "chart.js/3.7.1",
+      "hashPath": "chart.js.3.7.1.nupkg.sha512"
     },
     "CrystalReports.AxShockwaveFlashObjects/13.0.4003": {
       "type": "package",

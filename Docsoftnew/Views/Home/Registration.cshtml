@@ -83,7 +83,7 @@
                     <label class="form-label">Aadhar No:</label>
                 </div>
                 <div class="col-md-5 col-sm-5">
-                    <input asp-for="Aadhar_No" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="16" class="form-control" />
+                    <input asp-for="Aadhar_No" id="aadhar" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="16" class="form-control" />
                     <span asp-validation-for="Aadhar_No" class="text-danger"></span>
                 </div>
             </div>
@@ -164,10 +164,34 @@
                 </div>
             </div>
         </div>
-    </div>
+
+
+
+                    <div class="modal fade" id="aadharmodel" tabindex="-1" aria-labelledby="aadharModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Aadhar Person</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="aadharlist" style="height:250px;overflow-y:scroll" class="list-group">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+   </div>
     </div>
 </div>
  
+
+
 
 
 </div>
@@ -187,21 +211,15 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
-
-	 
-
-	function age_sh()
+     
+    function age_sh()
 	{
 		
 		var get_age = $("#age_value").val();
 
 		var age = get_age * 12;
-	 
-
-   
-const date = new Date();
-
-		date.setMonth(date.getMonth() - age);
+        const date = new Date();
+        date.setMonth(date.getMonth() - age);
 		document.getElementById("date_pic").valueAsDate = new Date(date);
 		 
 	}
@@ -223,7 +241,7 @@ const date = new Date();
 					$('#exampleModal').modal('show');
 					$("#namelist").empty();
 					$.each(result, function (i, item) {
-                        $("#namelist").append("<a onclick='GetAppoint(" + encodeURIComponent(item.UHID) + ")' class='list-group-item list-group-item-action'>" + item.Patient_Name + "</a>");
+                        $("#namelist").append("<a  value='"+item.UHID+"' class='list-group-item list-group-item-action'>" + item.Patient_Name + "</a>");
                
 					});
 				},
@@ -235,31 +253,118 @@ const date = new Date();
 	});
 
 
-	function GetAppoint(UHID)
-	{ 
-        alert(UHID);
-		 
-		$.ajax(
-			{
-				type: 'POST',
-				dataType: 'JSON',
-				url: '/Home/GetApooint',
-				data: {UHID: UHID },
-				success:
-					function (response) {
-      
-                     
-						window.location.href = response.redirectUrl;
+    $('#namelist').on('click', 'a', function () {
+        var UHID = $(this).attr('value');
+ 
 
-					},
-				error:
-					function (response) {
-						alert("Error: " + response);
-					}
-			});
-			 
+        $.ajax(
+            {
+                type: 'POST',
+                dataType: 'JSON',
+                url: '/Home/GetApooint',
+                data: { UHID: UHID },
+                success:
+                    function (response) {
 
-	}
 
+                        window.location.href = response.redirectUrl;
+
+                    },
+                error:
+                    function (response) {
+                        alert("Error: " + response);
+                    }
+            });
+
+
+    });
+
+
+    $("#aadhar").keyup(function(){
+
+     var d =    $("#aadhar").val();
+
+        
+            $.ajax({
+                type: 'POST',
+                dataType: 'JSON',
+                url: '/Home/chaadhar',
+                data: {
+                    aadhar: d
+                },
+                success: function (result)
+                {
+                    if (result.key == 1) {
+                         alert("allready Exist!");
+                        getactionresult();
+                    }
+                   
+                },
+                error: function () {
+                    console.log('Failed ');
+                }
+
+
+            }
+            );
+
+         
+    });
+
+
+    function getactionresult()
+    {
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            url: '/Home/chname',
+            data: {
+                aadhar: $("#aadhar").val()
+            },
+            success: function (result) {
+                alert("Hi");
+                $('#aadharmodel').modal('show');
+                $("#aadharlist").empty();
+                $.each(result, function (i, item) {
+                    $("#aadharlist").append("<a  value='" + item.UHID + "' class='list-group-item list-group-item-action'>" + item.Patient_Name + "</a>");
+
+                });
+            },
+            error: function () {
+                console.log('Failed ');
+            }
+        });
+    }
+
+
+    $('#aadharlist').on('click', 'a', function () {
+        var UHID = $(this).attr('value');
+
+
+        $.ajax(
+            {
+                type: 'POST',
+                dataType: 'JSON',
+                url: '/Home/GetApooint',
+                data: { UHID: UHID },
+                success:
+                    function (response) {
+
+
+                        window.location.href = response.redirectUrl;
+
+                    },
+                error:
+                    function (response) {
+                        alert("Error: " + response);
+                    }
+            });
+
+
+    });
+
+
+
+     
 
 </script>

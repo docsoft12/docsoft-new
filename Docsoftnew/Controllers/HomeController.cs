@@ -15,6 +15,7 @@ using AspNetCore.Reporting;
 using System.Data;
 using DocsoftBack.Account;
 using System.Xml.Linq;
+using System.Text.Json;
  
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
@@ -131,7 +132,95 @@ namespace Docsoftnew.Controllers
 
 
 
-		public string url = "";
+
+
+		[HttpPost]
+		public JsonResult chaadhar(string aadhar)
+		{
+			try
+			{
+				var sql = "Select Aadhar_No from Petient_Details where Aadhar_No = '" + aadhar + "'";
+				var result = MainEngine.GetFirst<string>(sql);
+				return Json(new { key = 1 });
+			}catch(InvalidOperationException ex)
+			{
+				return Json("None");
+				 
+			}
+
+		}
+
+        [HttpPost]
+        public JsonResult chname(string aadhar)
+        {
+			List<RegisterModels> sendalist = new();
+            try
+            {
+                var sql = "Select * from Petient_Details where Aadhar_No = '" + aadhar + "'";
+                sendalist =  MainEngine.GetList<RegisterModels>(sql).ToList();
+                return Json(sendalist);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Json("None");
+
+            }
+
+        }
+
+        public class GetOPDG
+        {
+
+            public string DayOfMonth { get; set; }
+            public string RecordCount { get; set; }
+
+        }
+
+        public class GetIPDG
+		{
+
+            public string DayOfMonth { get; set; }
+            public string RecordCount { get; set; }
+
+        }
+
+
+        public IActionResult Dashboard()
+		{
+
+
+			List<GetOPDG> getre = new();
+            DateTime currentDate = DateTime.Now;
+            DateTime previousMonth = currentDate.AddMonths(-1);
+            int year = previousMonth.Year;
+            int month = previousMonth.Month;
+            var sql = "SELECT DATEPART(day, Date_Reg) AS DayOfMonth, COUNT(*) AS RecordCount FROM OPD_Bill WHERE YEAR(Date_Reg) = '"+year+"' AND MONTH(Date_Reg) = '"+month+"' GROUP BY DATEPART(day, Date_Reg)";
+
+			getre = MainEngine.GetList<GetOPDG>(sql).ToList();
+
+
+
+            List<GetIPDG> getre1 = new();
+            DateTime currentDate1 = DateTime.Now;
+            DateTime previousMonth1 = currentDate.AddMonths(-1);
+            int year1= previousMonth.Year;
+            int mont1h = previousMonth.Month;
+            var sql1 = "SELECT DATEPART(day, Admit_Time) AS DayOfMonth, COUNT(*) AS RecordCount FROM IPD WHERE YEAR(Admit_Time) = '" + year + "' AND MONTH(Admit_Time) = '" + month + "' GROUP BY DATEPART(day, Admit_Time)";
+
+            getre1 = MainEngine.GetList<GetIPDG>(sql1).ToList();
+
+
+            string jsonData = System.Text.Json.JsonSerializer.Serialize(getre);
+            ViewBag.ChartData = jsonData;
+
+
+            string jsonData1 = System.Text.Json.JsonSerializer.Serialize(getre1);
+            ViewBag.ChartData1 = jsonData1;
+            return View();
+		}
+        
+
+        public string url = "";
 		[HttpPost]
 		 public async Task<IActionResult> BookApoint(ApponmentModels modes)
 		 { 
@@ -150,7 +239,7 @@ namespace Docsoftnew.Controllers
 			Age = (decimal)System.Math.Round(Age, 1);
 
 			//Console.WriteLine(modes.Ap_Time);
-			string res = (int.Parse(acp.Recipt_No("OPD", modes.Search)) + 1).ToString();
+			string res = (int.Parse(acp.Recipt_No("OPD", modes.UHID)) + 1).ToString();
 				ApponmentModels models = new ApponmentModels()
 				{
 					Consultant_ID = modes.Consultant_ID,

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "G7ViMInAq5EzhZNsBRxO2WjiGnfazFni6ihNxcXGVxlcmgReAuJTBq0/NrSBWAR2o6QZXWhYPDxwqgSyn7izWA==",
+  "dgSpecHash": "EIpwuWtXhFHRsnqhcZ6B71mAtU5WEkIDCXzoiCjARh4qJPy/0slV55EB+K1jcGGBPLh3pFjOTsCpu5OmDp+uog==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\DocSoft\\Docsoftnew\\Docsoftnew.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\aspnetcore.reporting\\2.1.0\\aspnetcore.reporting.2.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\aspnetcore.reportingservices\\2.1.0\\aspnetcore.reportingservices.2.1.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\chart.js\\3.7.1\\chart.js.3.7.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\crystalreports.axshockwaveflashobjects\\13.0.4003\\crystalreports.axshockwaveflashobjects.13.0.4003.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\crystalreports.engine\\13.0.4003\\crystalreports.engine.13.0.4003.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\crystalreports.reportappserver.clientdoc\\13.0.4003\\crystalreports.reportappserver.clientdoc.13.0.4003.nupkg.sha512",

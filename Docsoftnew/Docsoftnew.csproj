@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="Chart.js" Version="3.7.1" />
     <PackageReference Include="CrystalReports.Engine" Version="13.0.4003" />
     <PackageReference Include="CrystalReports.ReportSource" Version="13.0.4003" />
     <PackageReference Include="CrystalReports.Shared" Version="13.0.4003" />

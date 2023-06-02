@@ -57,7 +57,7 @@ namespace DocsoftBack.Appopintment
 			String Recept_No = "00";
 			 
 
-			var insql = "Insert into Recept_No (Category,Refrence_No) Values('" + Catogory + "','" + UHID + "') ";
+			var insql = "Insert into Recept_No (Category,Refrence_No) Values(@Category,@Refrence_No) ";
 
 			ReceptModels models = new()
 			{
@@ -67,6 +67,8 @@ namespace DocsoftBack.Appopintment
 			};
 
 			  MainEngine.ExecuteQuery(insql, models);
+
+			Console.WriteLine(UHID);
 
 
 			 var select = "Select ID from  Recept_No  where Refrence_No='" + UHID + "' order by ID DESC";

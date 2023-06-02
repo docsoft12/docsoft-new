@@ -29,8 +29,8 @@
 <div class="container" >
 	  
 
-	<input type="text" hidden="hidden" id="geturl" asp-for="Url" />
-	<input hidden="hidden" type="text" asp-for="UHID" id="doctorm" />
+	
+
 	@if(TempData["ErrorMessage"]!=null)
 	{
 			<div class="alert alert-danger">
@@ -154,6 +154,9 @@
 
 		<form method="post"  >
 			<input type="text" hidden="hidden"   id="tablemasala" />
+				<input type="text" hidden="hidden" id="geturl" asp-for="Url" />
+				<input hidden="hidden" type="text" asp-for="UHID" id="doctorm" />
+				<input hidden="hidden" type="text" asp-for="Patient_Name" id="pation" />
 
 			
 		<div  class="row mt-2">
@@ -422,11 +425,39 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 	$(document).ready(function () {
 		var getid = $("#doctorm").val();
 
-		alert(getid);
+	 
 		$('#Sectioap').attr('hidden', 'hidden');
 
 		if (getid != "") {
-			$("#search").val(getid);
+		$("#search").val(getid);
+
+			 
+			$.ajax({
+				type: 'POST',
+				url: '/Home/GetSearch',
+				data: {
+					search: $("#search").val()
+				},
+				success: function (result) {
+
+					$('#example tbody').empty();
+					$('#Sectioap').attr('hidden', 'hidden');
+
+
+					$.each(result, function (i, item) {
+
+						var newrow = '<tr><td> ' + item.UHID + ' </td><td>' + item.Patient_Name + '</td><td>' + item.Mobile_No + '</td><td>' + item.Aadhar_No + '</td></tr>';
+						$('#example').append(newrow);
+					});
+					$("#Sectioap").removeAttr("hidden");
+
+				},
+				error: function () {
+					console.log('Failed');
+				}
+			});
+
+
 			 
 		}
 
@@ -476,10 +507,15 @@ margin-left:5px;overflow-y:scroll" class="list-group">
 
 
 	$("#book_ap").click(function(){
+ 
 		$('#Sectioap').attr('hidden', 'hidden');
 
 
 	});
+
+ 
+
+	 
 
 
 </script>
